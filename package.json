@@ -1,0 +1,33 @@
+{
+  "name": "stromberg-guitar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanHariton/stromberg-guitar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanHariton/stromberg-guitar/issues"
+  },
+  "homepage": "https://github.com/DanHariton/stromberg-guitar#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.39",
+    "stylus": "^0.55.0",
+    "stylus-loader": "^6.2.0"
+  },
+  "dependencies": {
+    "startbootstrap-sb-admin-2": "^4.1.4"
+  }
+}
