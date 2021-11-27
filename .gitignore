@@ -53,3 +53,7 @@
 
 .idea/
 node_modules/
+.env.local
+/public/admin
+/public/site
+/public/mix-manifest.json

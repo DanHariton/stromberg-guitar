@@ -4,7 +4,9 @@ mix
     .disableNotifications()
     .options({processCssUrls: false})
     .setPublicPath('public')
-    .js('templates/_js/app.js', 'public')
-    .stylus('templates/_css/app.styl', 'public')
+    .js('assets/admin/js/app.js', 'public/admin')
+    .js('assets/site/js/app.js', 'public/site')
+    .stylus('assets/admin/css/app.styl', 'public/admin')
+    .stylus('assets/site/css/app.styl', 'public/site')
     .version()
 ;
