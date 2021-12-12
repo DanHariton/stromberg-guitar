@@ -1,0 +1,86 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}Merch{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.merch.title'|trans} %}
+
+    <div class="container mt-5">
+        <div class="mb-5" data-aos="fade-up">
+            <h2>Short Sleeve Shirts</h2>
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
+                    <h4>Stromberg Short Sleeve 2021</h4>
+                    <p>25 USD</p>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
+                    <h4>Stromberg Short Sleeve 2021</h4>
+                    <p>25 USD</p>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
+                    <h4>Stromberg Short Sleeve 2021</h4>
+                    <p>25 USD</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5" data-aos="fade-up">
+            <h2>Hoodies</h2>
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
+                    <h4>Stromberg Short Sleeve 2021</h4>
+                    <p>25 USD</p>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
+                    <h4>Stromberg Short Sleeve 2021</h4>
+                    <p>25 USD</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-light-dark" data-aos="fade-up">
+            <div class="row">
+                <div class="col-12 col-lg-6 p-5">
+                    <div class="p-xl-5">
+                        <h2 class="mb-5">If you are intrested in some merch, let us know</h2>
+
+                        <form action="">
+                            <div class="form-group mb-5">
+                                <label for="name">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required="required">
+                            </div>
+                            <div class="form-group mb-5">
+                                <label for="email">Your Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required="required">
+                            </div>
+                            <div class="form-group mb-5">
+                                <label for="message">Message (400 characters)</label>
+                                <textarea type="email" class="form-control" id="message" name="message" maxlength="400"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-light pl-4 pr-4 float-right rounded-0">
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-5">
+                    <p class="lead text-bolder mt-xl-5">Or contact us directly</p>
+                    <p>
+                        Šimon Palek <br>
+                        Email simon@nbe.cz
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+{% endblock %}

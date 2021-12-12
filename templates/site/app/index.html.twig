@@ -1,0 +1,179 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}Stromberg{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.index.title'|trans} %}
+
+    <div id="main-carousel" class="carousel slide mb-7" data-ride="carousel" data-aos="fade-up">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="https://loremflickr.com/1920/660/guitar?random={{ random(1, 999999) }}" alt="Slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://loremflickr.com/1920/660/guitar?random={{ random(1, 999999) }}" alt="Slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://loremflickr.com/1920/660/guitar?random={{ random(1, 999999) }}" alt="Slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">{{ 'site.index.slider.previous'|trans }}</span>
+        </a>
+        <a class="carousel-control-next" href="#main-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">{{ 'site.index.slider.next'|trans }}</span>
+        </a>
+    </div>
+
+    <div class="container">
+        {% include 'site/app/_component/short_block_with_text.html.twig' with {
+            'header': 'site.index.established.header'|trans,
+            'text': 'site.index.established.text'|trans,
+            'link': '<a href="#" class="underlined">'~ 'site.index.established.more'|trans ~ '</a>'
+        } %}
+
+        <div class="row mb-7 text-center no-gutters thumbnail-menu" data-aos="fade-up">
+            <div class="col-12 col-md-4">
+                <a href="#">
+                    <div class="m-1 element zoom-out" style="background-image: url('https://loremflickr.com/650/425/guitar?random={{ random(1, 999999) }}')">
+                        <div class="inner"><h3>{{ 'site.index.menuThumbnail.models'|trans }}</h3></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-4">
+                <a href="#">
+                    <div class="m-1 element zoom-out" style="background-image: url('https://loremflickr.com/650/425/guitar?random={{ random(1, 999999) }}')">
+                        <div class="inner"><h3>{{ 'site.index.menuThumbnail.artists'|trans }}</h3></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-4">
+                <a href="#">
+                    <div class="m-1 element zoom-out" style="background-image: url('https://loremflickr.com/650/425/guitar?random={{ random(1, 999999) }}')">
+                        <div class="inner"><h3>{{ 'site.index.menuThumbnail.merch'|trans }}</h3></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="m-auto container-limited">
+            <div class="row no-gutters">
+                <div class="col-12 col-md-6">
+                    <div class="mb-5 m-1">
+                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
+                            <h2>Lorem ipsum dolor sit amet</h2>
+                            <p class="mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
+                            </p>
+                            <a href="#" class="underlined">Read more</a>
+                        </div>
+                    </div>
+                    <div class="mb-5 m-1">
+                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
+                            <h2>Lorem ipsum dolor sit amet</h2>
+                            <p class="mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores doloremque doloribus esse quibusdam velit. Architecto commodi cupiditate dignissimos dolor eos est molestiae, nobis numquam, odit perspiciatis placeat quasi ratione soluta.
+                            </p>
+                            <a href="#" class="underlined">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="d-none d-md-block d-lg-block d-xl-block" style="height: 225px;"></div>
+                    <div class="mb-5 m-1">
+                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
+                            <h2>Lorem ipsum dolor sit amet</h2>
+                            <p class="mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dicta doloribus ea id ipsum labore, modi nam natus nostrum numquam porro quo recusandae reiciendis saepe tenetur totam vel voluptate voluptatibus.
+                            </p>
+                            <a href="#" class="underlined">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row no-gutters contact-tabs mt-5">
+            <div class="col-12 col-lg-6 item" style="background-image: url('https://loremflickr.com/650/300/guitar?random={{ random(1, 999999) }}')">
+                <a href="#tab-contact-us" class="contact-tab-link d-block pl-5 pt-5 pb-5">
+                    <div class="pl-lg-4">
+                        <p class="text-lead mt-5">{{ 'site.index.contactMenu.contactUs'|trans }}</p>
+                        <h4 class="mb-4">
+                            {{ 'site.index.contactMenu.contactUsText'|trans|raw }}
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-lg-6 item" style="background-image: url('https://loremflickr.com/650/300/guitar?random={{ random(1, 999999) }}')">
+                <a href="#tab-contact-distributors" class="contact-tab-link d-block pl-5 pt-5 pb-5">
+                    <div class="pl-lg-4">
+                        <p class="text-lead mt-5">{{ 'site.index.contactMenu.contactDistributors'|trans }}</p>
+                        <h4 class="mb-4">
+                            {{ 'site.index.contactMenu.contactDistributorsText'|trans|raw }}
+                        </h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="contact-tabs-content mb-7">
+            <div id="tab-contact-us" class="bg-light-dark item fade">
+                <div class="row">
+                    <div class="col-12 col-lg-6 p-5">
+                        <div class="p-xl-5">
+                            <h2 class="mb-5">{{ 'site.index.contactMenu.contactUsTab.header'|trans|raw }}</h2>
+
+                            <form action="">
+                                <div class="form-group mb-5">
+                                    <label for="name">{{ 'site.index.contactMenu.contactUsTab.form.name'|trans }}</label>
+                                    <input type="text" class="form-control" id="name" name="name" required="required">
+                                </div>
+                                <div class="form-group mb-5">
+                                    <label for="email">{{ 'site.index.contactMenu.contactUsTab.form.email'|trans }}</label>
+                                    <input type="email" class="form-control" id="email" name="email" required="required">
+                                </div>
+                                <div class="form-group mb-5">
+                                    <label for="message">{{ 'site.index.contactMenu.contactUsTab.form.message'|trans }}</label>
+                                    <textarea type="email" class="form-control" id="message" name="message" maxlength="400"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-outline-light pl-4 pr-4 float-right rounded-0">
+                                        {{ 'site.index.contactMenu.contactUsTab.form.send'|trans }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 p-5">
+                        <p class="lead text-bolder mt-xl-5">Stromberg</p>
+                        <p>
+                            NBE Corp. s. r. o. <br>
+                            Hořovice 115 88 <br>
+                            Czech Republic <br><br>
+                            Šimon Palek <br>
+                            Telephone <a href="tel:00420721345678">00420 721 345 678</a> <br><br>
+                            Jiří Palek <br>
+                            Telephone <a href="tel:00420721345679">00420 721 345 679</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-contact-distributors" class="bg-light-dark item fade">
+                <div class="row">
+                    <div class="col-12 col-lg-6 p-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+
+{% endblock %}

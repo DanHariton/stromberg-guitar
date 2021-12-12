@@ -1,0 +1,36 @@
+site:
+  index:
+    title: 'Stromberg-Gitarren sind weltweit als erstklassige Archtop-Gitarren bekannt'
+    slider:
+      previous: 'Vorherige'
+      next: 'Nächste'
+    established:
+      header: '1905 gegründet und immer noch in Hořovice, Tschechien hergestellt.'
+      text: 'Stromberg-Gitarren sind weltweit als erstklassige Archtop-Gitarren mit einem guten Ruf für Klang und Spielbarkeit bekannt. Stromberg-Gitarren wurden entwickelt und gebaut, um sich im Big-Band-Jazz-Setting auszuzeichnen. Die heutigen Stromberg-Gitarren führen diese Tradition fort und bleiben dem Erbe dieser ikonischen Marke treu.'
+      more: 'Mehr über Stromberg'
+    menuThumbnail:
+      models: 'Modelle'
+      artists: 'Künstler'
+      merch: 'Künstler'
+    contactMenu:
+      contactUs: 'Kontaktiere uns'
+      contactUsText: 'Die Kontaktaufnahme mit uns hilft uns oft, <br> besser zu verstehen'
+      contactDistributors: 'Händler kontaktieren'
+      contactDistributorsText: 'Kontaktaufnahme mit Distributoren <br> aus Tschechien'
+      contactUsTab:
+        header: 'Kontakt aufnehmen hilft <br> Sie besser zu verstehen'
+        form:
+          name: 'Dein Name'
+          email: 'Deine E-Mail'
+          message: 'Nachricht (400 Zeichen)'
+          send: 'Senden'
+  guitar:
+    title: 'Wählen Sie Ihr Modell, Variante und Farbe selbst aus'
+  about:
+    title: 'Über Stromberg, erstklassige Archtop-Gitarren mit einem Ruf für Klang und Spielbarkeit'
+  artists:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  artist:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  merch:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'

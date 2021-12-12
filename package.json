@@ -28,6 +28,8 @@
     "stylus-loader": "^6.2.0"
   },
   "dependencies": {
+    "@splidejs/splide": "^3.6.9",
+    "aos": "^2.3.4",
     "popper.js": "^1.16.1",
     "startbootstrap-sb-admin-2": "^4.1.4"
   }

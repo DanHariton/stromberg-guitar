@@ -1,0 +1,28 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}Artist{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.artist.title'|trans} %}
+
+    <div class="container mt-5" data-aos="fade-up">
+        <div class="mb-5">
+            CONTENT
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-12 mb-4">
+                <img class="img-full" src="https://loremflickr.com/1000/300/guitar?random={{ random(1, 999999) }}" alt="Artist">
+            </div>
+            <div class="col-12 col-lg-6 mb-4">
+                <img class="img-full" src="https://loremflickr.com/1000/600/guitar?random={{ random(1, 999999) }}" alt="Artist">
+            </div>
+            <div class="col-12 col-lg-6 mb-4">
+                <img class="img-full" src="https://loremflickr.com/1000/600/guitar?random={{ random(1, 999999) }}" alt="Artist">
+            </div>
+        </div>
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+{% endblock %}

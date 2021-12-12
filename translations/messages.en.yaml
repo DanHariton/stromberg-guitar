@@ -1,0 +1,36 @@
+site:
+  index:
+    title: 'Stromberg guitars are known around the world as premier archtop guitars'
+    slider:
+      previous: 'Previous'
+      next: 'Next'
+    established:
+      header: 'Established in 1905 and still manufactured in Hořovice, Czech Republic.'
+      text: 'Stromberg guitars are known around the world as premier archtop guitars with a reputation for sound and playability. Designed and built to excel in the big band jazz setting, Stromberg guitars have always been known for their high quality construction and the ability to “cut through the mix”. Today’s Stromberg guitars continue that tradition and stay true to the legacy of this iconic brand.'
+      more: 'More About Stromberg'
+    menuThumbnail:
+      models: 'Models'
+      artists: 'Artists'
+      merch: 'Merch'
+    contactMenu:
+      contactUs: 'Contact us'
+      contactUsText: 'Contacting us often helps us to <br> better understand you'
+      contactDistributors: 'Contact Distributors'
+      contactDistributorsText: 'Contacting distributors <br> out of the Czechia'
+      contactUsTab:
+        header: 'Get in touch helps to <br> understand you better'
+        form:
+          name: 'Your Name'
+          email: 'Your Email'
+          message: 'Message (400 characters)'
+          send: 'Send'
+  guitar:
+    title: 'Choose your model, variant and color by yourself'
+  about:
+    title: 'About Stromberg, premier archtop guitars with a reputation for sound and playability'
+  artists:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  artist:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  merch:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'

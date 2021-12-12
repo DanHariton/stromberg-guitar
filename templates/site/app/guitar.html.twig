@@ -1,0 +1,93 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}Guitar{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.guitar.title'|trans} %}
+
+    <div class="container">
+        <div class="row mb-4" data-aos="fade-up">
+            <div class="col-12 col-sm-12 col-lg-8">
+                <div class="row mb-4">
+                    <div class="col-12 col-sm-4">
+                        <strong class="mb-4 d-block text-lead">Models</strong>
+                        <h5>Newport</h5>
+                        <h5>Montereux</h5>
+                        <h5>Monterey</h5>
+                        <h5>Fremont</h5>
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none mb-4 bg-white">
+                    </div>
+                    <div class="col-12 col-sm-4 border-left-white-sm-plus">
+                        <strong class="mb-4 d-block text-lead">Variants</strong>
+                        <h5>Maple</h5>
+                        <h5>Maple Bigsby</h5>
+                        <h5>Flamed Maple</h5>
+                        <h5>Flamed Maple Bigsby</h5>
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none mb-4 bg-white">
+                    </div>
+                    <div class="col-12 col-sm-4 border-left-white-sm-plus">
+                        <strong class="mb-4 d-block text-lead">Colors</strong>
+                        <h5>Solid White</h5>
+                        <h5>Solid Black</h5>
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none bg-white">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4">
+                <img class="mb-4 img-full" src="https://loremflickr.com/1000/800/guitar?lock=156" alt="img" />
+            </div>
+        </div>
+
+        <div class="splide splide-4 mb-6" data-aos="fade-up">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img class="img-full" src="https://loremflickr.com/1000/800/guitar?lock=156" alt="img" />
+                    </li>
+                    <li class="splide__slide">
+                        <img class="img-full" src="https://loremflickr.com/1000/800/guitar?lock={{ random(1, 999999) }} " alt="img" />
+                    </li>
+                    <li class="splide__slide">
+                        <img class="img-full" src="https://loremflickr.com/1000/800/guitar?lock={{ random(1, 999999) }} " alt="img" />
+                    </li>
+                    <li class="splide__slide">
+                        <img class="img-full" src="https://loremflickr.com/1000/800/guitar?lock={{ random(1, 999999) }} " alt="img" />
+                    </li>
+                    <li class="splide__slide">
+                        <img class="img-full" src="https://loremflickr.com/1000/800/guitar?lock={{ random(1, 999999) }} " alt="img" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {% include 'site/app/_component/short_block_with_text.html.twig' with {
+            'header': 'The Montreux takes you back in time',
+            'text': 'Think the golden age of jazz and the hey day of Chicago and Memphis blues.
+Our traditional Stromberg brass tailpiece is combined with a perfect aged finish
+and select woods to bring you all the Stromberg tonality that you know and love.
+The proprietary Stromberg piezo pickup in the bridge takes this thinline Stromberg to a whole new tonal level.',
+            'link': ''
+        } %}
+
+        <div class="bg-light-dark p-5">
+            CONTENT
+        </div>
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+
+    <div class="modal splide-galery-modal" tabindex="-1" role="dialog" id="slider-modal">
+        <button class="btn btn-arrow btn-arrow-left" id="slider-modal-prev"><i class="fas fa-arrow-left"></i></button>
+        <button class="btn btn-arrow btn-arrow-right" id="slider-modal-next"><i class="fas fa-arrow-right"></i></button>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div id="slider-modal-image-container"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

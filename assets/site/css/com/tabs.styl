@@ -1,0 +1,18 @@
+.contact-tabs
+  .item
+    background-repeat no-repeat
+    background-size cover
+    .contact-tab-link
+      transition background-color ease-in-out 0.2s
+      &:hover, &.active
+        background-color rgba(33,33,33,0.9)
+
+.contact-tabs-content
+  .item
+    opacity 0
+    max-height 0
+    overflow hidden
+    transition opacity ease-in 0.2s, max-height ease-in 0.2s
+  .item.show
+    opacity 1
+    max-height 1000px

@@ -1,0 +1,36 @@
+site:
+  index:
+    title: 'Kytary Stromberg jsou známé po celém světě jako přední archtop kytary'
+    slider:
+      previous: 'Předchozí'
+      next: 'Další'
+    established:
+      header: 'Založena v roce 1905 a dodnes se vyrábí v Hořovicích v České republice.'
+      text: 'Kytary Stromberg jsou známé po celém světě jako prvotřídní archtop kytary s pověstí pro zvuk a hratelnost. Kytary Stromberg, které byly navrženy a vyrobeny tak, aby vynikaly v prostředí big band jazzu, byly vždy známé svou vysoce kvalitní konstrukcí a schopností „prořezat mix“. Dnešní kytary Stromberg pokračují v této tradici a zůstávají věrné odkazu této ikonické značky.'
+      more: 'Více o Strombergu'
+    menuThumbnail:
+      models: 'Modelky'
+      artists: 'Umělci'
+      merch: 'Merch'
+    contactMenu:
+      contactUs: 'Kontaktujte nás'
+      contactUsText: 'Když nás kontaktujete, často nám to pomůže <br> vám lépe porozumět'
+      contactDistributors: 'Kontaktujte distributory'
+      contactDistributorsText: 'Kontaktování distributorů <br> mimo ČR'
+      contactUsTab:
+        header: 'Kontakt vám pomůže <br> lépe vám porozumět'
+        form:
+          name: 'Tvé jméno'
+          email: 'Tvůj e-mail'
+          message: 'Zpráva (400 znaků)'
+          send: 'Poslat'
+  guitar:
+    title: 'Vyberte si svůj model, variantu a barvu sami'
+  about:
+    title: 'O Stromberg, předních archtop kytarách s pověstí pro zvuk a hratelnost'
+  artists:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  artist:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  merch:
+    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
