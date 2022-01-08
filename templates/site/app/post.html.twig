@@ -1,6 +1,6 @@
 {% extends 'site/layout.html.twig' %}
 
-{% block title %}Post{% endblock %}
+{% block title %}{{ etrans.read(post.title) }}{% endblock %}
 
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
@@ -16,6 +16,10 @@
 
     <div class="container mt-5 text-two-column" data-aos="fade-up">
         {{ etrans.read(post.content)|raw }}
+    </div>
+
+    <div class="container mt-5" data-aos="fade-up">
+        <a href="{{ path('site_app_index') }}" class="underlined">{{ 'site.post.back'|trans }}</a>
     </div>
 
     {% include 'site/app/_component/footer.html.twig' %}

@@ -24,6 +24,8 @@ site:
           email: 'Tvůj e-mail'
           message: 'Zpráva (400 znaků)'
           send: 'Poslat'
+    posts:
+      readMore: 'Přečtěte si více'
   guitar:
     title: 'Vyberte si svůj model, variantu a barvu sami'
   about:
@@ -34,3 +36,5 @@ site:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   merch:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  post:
+    back: 'Před'

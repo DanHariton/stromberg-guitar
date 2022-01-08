@@ -24,6 +24,8 @@ site:
           email: 'Deine E-Mail'
           message: 'Nachricht (400 Zeichen)'
           send: 'Senden'
+    posts:
+      readMore: 'Weiterlesen'
   guitar:
     title: 'Wählen Sie Ihr Modell, Variante und Farbe selbst aus'
   about:
@@ -34,3 +36,5 @@ site:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   merch:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+  post:
+    back: 'Zurück'
