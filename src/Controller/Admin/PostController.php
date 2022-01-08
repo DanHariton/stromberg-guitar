@@ -6,7 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\EntityTranslator;
-use App\Service\FileUploader;
+use App\Service\ImageUploader;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -72,12 +72,12 @@ class PostController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param EntityTranslator $entityTranslator
-     * @param FileUploader $fileUploader
+     * @param ImageUploader $fileUploader
      * @return Response
      * @throws Exception
      */
     public function create(Request $request, EntityManagerInterface $em, EntityTranslator $entityTranslator,
-                           FileUploader $fileUploader)
+                           ImageUploader $fileUploader)
     {
         $post = new Post();
         $form = $this->createForm(PostType::class)->handleRequest($request);
@@ -87,7 +87,7 @@ class PostController extends AbstractController
             $postImgFile = $form->get('image')->getData();
 
             if ($postImgFile) {
-                $newImgFilename = $fileUploader->upload($postImgFile);
+                $newImgFilename = $fileUploader->upload($postImgFile, ImageUploader::TYPE_1280x720);
                 $post->setImageFilename($newImgFilename);
             }
 
@@ -117,14 +117,14 @@ class PostController extends AbstractController
      * @param Post $post
      * @param EntityTranslator $entityTranslator
      * @param Request $request
-     * @param FileUploader $fileUploader
+     * @param ImageUploader $fileUploader
      * @param Filesystem $filesystem
      * @param EntityManagerInterface $em
      * @return Response
      * @throws Exception
      */
     public function edit(Post $post, EntityTranslator $entityTranslator, Request $request,
-                         FileUploader $fileUploader, Filesystem $filesystem, EntityManagerInterface $em)
+                         ImageUploader $fileUploader, EntityManagerInterface $em)
     {
         $form = $this->createForm(PostType::class, $entityTranslator->unmap($post, Post::POST_VARS_LANG, Post::POST_VARS))
             ->handleRequest($request);
@@ -135,9 +135,8 @@ class PostController extends AbstractController
             $postImgFile = $form->get('image')->getData();
 
             if ($postImgFile) {
-                $newImgFilename = $fileUploader->upload($postImgFile);
-                // TO DO: check delete img
-                $filesystem->remove($this->getParameter('img_directory') . $post->getImageFilename());
+                $fileUploader->remove($post->getImageFilename());
+                $newImgFilename = $fileUploader->upload($postImgFile, ImageUploader::TYPE_1280x720);
                 $post->setImageFilename($newImgFilename);
             }
 

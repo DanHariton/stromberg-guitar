@@ -10,7 +10,7 @@ use App\Form\MerchType;
 use App\Repository\MerchCategoryRepository;
 use App\Repository\MerchRepository;
 use App\Service\EntityTranslator;
-use App\Service\FileUploader;
+use App\Service\ImageUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -114,11 +114,11 @@ class MerchController extends AbstractController
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param EntityTranslator $entityTranslator
-     * @param FileUploader $fileUploader
+     * @param ImageUploader $fileUploader
      * @return Response
      * @throws Exception
      */
-    public function add(EntityManagerInterface $em, Request $request, EntityTranslator $entityTranslator, FileUploader $fileUploader)
+    public function add(EntityManagerInterface $em, Request $request, EntityTranslator $entityTranslator, ImageUploader $fileUploader)
     {
         $merch = new Merch();
         $form = $this->createForm(MerchType::class)->handleRequest($request);

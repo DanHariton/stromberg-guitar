@@ -14,14 +14,18 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Jazyk - <b>{% if app.session.get('language') is null %}CZ{% else %}{{ app.session.get('language') }}{% endif %}</b></span>
+            <span>Jazyk - <b>
+                {% if app.session.get('language') == localeEn %}EN{% endif %}
+                {% if app.session.get('language') == localeCs %}CZ{% endif %}
+                {% if app.session.get('language') == localeDe %}DE{% endif %}
+                </b></span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Překlady pro:</h6>
-                <a class="collapse-item {% if app.session.get('language') == 'EN' %}active{% endif %}" href="{{ path('_change_show_language', {'language': 'EN'}) }}">EN</a>
-                <a class="collapse-item {% if app.session.get('language') == 'CZ' or app.session.get('language') is null %}active{% endif %}" href="{{ path('_change_show_language', {'language': 'CZ'}) }}">CZ</a>
-                <a class="collapse-item {% if app.session.get('language') == 'DE' %}active{% endif %}" href="{{ path('_change_show_language', {'language': 'DE'}) }}">DE</a>
+                <a class="collapse-item {% if app.session.get('language') == localeEn %}active{% endif %}" href="{{ path('_change_show_language', {'language': localeEn}) }}">EN</a>
+                <a class="collapse-item {% if app.session.get('language') == localeCs or app.session.get('language') is null %}active{% endif %}" href="{{ path('_change_show_language', {'language': localeCs}) }}">CZ</a>
+                <a class="collapse-item {% if app.session.get('language') == localeDe %}active{% endif %}" href="{{ path('_change_show_language', {'language': localeDe}) }}">DE</a>
 
             </div>
         </div>

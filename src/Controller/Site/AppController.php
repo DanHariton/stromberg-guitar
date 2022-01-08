@@ -2,17 +2,22 @@
 
 namespace App\Controller\Site;
 
+use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
 {
     /**
-     * @Route("/{_locale}", name="site_app_index", defaults={"_locale": "cs"})
+     * @Route("/{_locale}", name="site_app_index", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
-    public function index()
+    public function index(EntityManagerInterface $em)
     {
-        return $this->render('site/app/index.html.twig');
+        $lastPosts = $em->getRepository(Post::class)->findLastPosts(3);
+        return $this->render('site/app/index.html.twig', [
+            'lastPosts' => $lastPosts
+        ]);
     }
 
     /**
@@ -56,10 +61,12 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/post", name="site_app_post", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/post/{post}", name="site_app_post", defaults={"_locale": "cs"})
      */
-    public function post()
+    public function post(Post $post)
     {
-        return $this->render('site/app/post.html.twig');
+        return $this->render('site/app/post.html.twig', [
+            'post' => $post
+        ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validation;
+namespace App\Validator;
 
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

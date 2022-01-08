@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -27,21 +28,20 @@ class AppAuthenticator extends AbstractAuthenticator
 
     public const LOGIN_ROUTE = 'admin_security_login';
 
-    /** @var UrlGeneratorInterface */
     private UrlGeneratorInterface $urlGenerator;
-
-    /** @var EntityManagerInterface */
     private EntityManagerInterface $entityManager;
+    private SessionInterface $session;
 
     /**
      * AppAuthenticator constructor.
      * @param UrlGeneratorInterface $urlGenerator
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, EntityManagerInterface $entityManager)
+    public function __construct(UrlGeneratorInterface $urlGenerator, EntityManagerInterface $entityManager, SessionInterface $session)
     {
         $this->urlGenerator = $urlGenerator;
         $this->entityManager = $entityManager;
+        $this->session = $session;
     }
 
     /**
@@ -91,6 +91,10 @@ class AppAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        if ($this->session->get('language') === null) {
+            $this->session->set('language', 'cs');
+        }
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }

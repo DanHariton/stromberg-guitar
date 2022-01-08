@@ -9,13 +9,13 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             {{ form_start(form) }}
-            <div class="{% if app.session.get('language') != 'CZ' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeCs %}d-none{% endif %}">
                 {{ form_row(form.nameCs) }}
             </div>
-            <div class="{% if app.session.get('language') != 'DE' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeDe %}d-none{% endif %}">
                 {{ form_row(form.nameDe) }}
             </div>
-            <div class="{% if app.session.get('language') != 'EN' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeEn %}d-none{% endif %}">
                 {{ form_row(form.nameEn) }}
             </div>
             {{ form_end(form) }}

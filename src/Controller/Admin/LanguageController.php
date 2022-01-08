@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LanguageController extends AbstractController
 {
     /**
-     * @Route("/change-show-language/{language}", name="_change_show_language", requirements={"language"="EN|CZ|DE"})
+     * @Route("/change-show-language/{language}", name="_change_show_language", requirements={"language"="en|cs|de"})
      * @param $language
      * @param Request $request
      * @return RedirectResponse

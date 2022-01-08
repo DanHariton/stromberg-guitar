@@ -62,41 +62,45 @@
         <div class="m-auto container-limited">
             <div class="row no-gutters">
                 <div class="col-12 col-md-6">
-                    <div class="mb-5 m-1">
-                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
-                            <h2>Lorem ipsum dolor sit amet</h2>
-                            <p class="mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
-                            </p>
-                            <a href="#" class="underlined">Read more</a>
+                    {% for post in lastPosts|slice(0, 1) %}
+                        <div class="mb-5 m-1">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <h2>{{ etrans.read(post.title) }}</h2>
+                                <p class="mb-4">
+                                    {{ etrans.read(post.preview) }}
+                                </p>
+                                <a href="{{ path('site_app_post', {'post': post.id}) }}" class="underlined">Read more</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-5 m-1">
-                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
-                            <h2>Lorem ipsum dolor sit amet</h2>
-                            <p class="mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores doloremque doloribus esse quibusdam velit. Architecto commodi cupiditate dignissimos dolor eos est molestiae, nobis numquam, odit perspiciatis placeat quasi ratione soluta.
-                            </p>
-                            <a href="#" class="underlined">Read more</a>
+                    {% endfor %}
+                    {% for post in lastPosts|slice(2, 1) %}
+                        <div class="mb-5 m-1">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <h2>{{ etrans.read(post.title) }}</h2>
+                                <p class="mb-4">
+                                    {{ etrans.read(post.preview) }}
+                                </p>
+                                <a href="{{ path('site_app_post', {'post': post.id}) }}" class="underlined">Read more</a>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="d-none d-md-block d-lg-block d-xl-block" style="height: 225px;"></div>
-                    <div class="mb-5 m-1">
-                        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                            <img class="mb-4 img-full" src="https://loremflickr.com/750/470/guitar?random={{ random(1, 999999) }} " alt="img" />
-                            <h2>Lorem ipsum dolor sit amet</h2>
-                            <p class="mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid laudantium nam recusandae tenetur totam? Cum, iste itaque libero non numquam provident suscipit voluptatem. Aperiam aspernatur eaque eveniet iste non, officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet consequatur cum dolor eos error et ex expedita, harum hic ipsa molestiae officiis possimus quia rerum sed sequi voluptas voluptatem.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dicta doloribus ea id ipsum labore, modi nam natus nostrum numquam porro quo recusandae reiciendis saepe tenetur totam vel voluptate voluptatibus.
-                            </p>
-                            <a href="#" class="underlined">Read more</a>
+                    {% for post in lastPosts|slice(1, 1) %}
+                        <div class="mb-5 m-1">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <h2>{{ etrans.read(post.title) }}</h2>
+                                <p class="mb-4">
+                                    {{ etrans.read(post.preview) }}
+                                </p>
+                                <a href="{{ path('site_app_post', {'post': post.id}) }}" class="underlined">Read more</a>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

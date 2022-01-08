@@ -2,15 +2,48 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+
 class EntityTranslator
 {
-
     /** @var string[] */
     private array $allLocales;
 
-    public function __construct()
+    public function __construct(RequestStack $request)
     {
         $this->allLocales = ['Cs', 'En', 'De'];
+        $this->selectedViewLocale = ucfirst($request->getCurrentRequest()->get('_locale', 'cs'));
+    }
+
+    public function getAllLocales()
+    {
+        return $this->allLocales;
+    }
+
+    public function jsonHtml(string $json)
+    {
+        $locales = json_decode($json);
+        $response = '';
+
+        foreach ($locales as $locale => $data) {
+            $response .= '<b>' . mb_strtoupper($locale) . '</b>: ' . $data . '<br>';
+        }
+
+        return $response;
+    }
+
+    public function read(string $data)
+    {
+        $locales = json_decode($data, true);
+
+        $result = '';
+        foreach ($locales as $row) {
+            if ($row) {
+                $result = $row;
+            }
+        }
+
+        return $locales[$this->selectedViewLocale] ?: $result;
     }
 
     public function map($form, $entity, $varsLang, $vars = null)

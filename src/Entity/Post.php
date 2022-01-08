@@ -28,8 +28,7 @@ class Post
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=3, max=255)
+     * @ORM\Column(type="text")
      */
     private string $title;
 
@@ -54,13 +53,12 @@ class Post
     private $enabled;
 
     /**
-     * @ORM\Column(type="string", length=60)
-     * @Assert\Length(min=3, max=60)
+     * @ORM\Column(type="text")
      */
     private string $metaTitle;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private ?string $metaDescription;
 

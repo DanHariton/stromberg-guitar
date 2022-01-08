@@ -6,6 +6,8 @@ require('startbootstrap-sb-admin-2/js/sb-admin-2');
 window.$.fn.DataTable = require('startbootstrap-sb-admin-2/vendor/datatables/jquery.dataTables.min.js');
 window.$.fn.DataTable = require('startbootstrap-sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.js');
 
+require('./util/bootstrap_file_fix.js');
+
 $(document).ready(function () {
     $('.data-table').DataTable({
         order: {1: "desc"},

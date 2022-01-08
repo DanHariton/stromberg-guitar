@@ -10,15 +10,15 @@
         <div class="card-body">
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            <div class="{% if app.session.get('language') != 'CZ' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeCs %}d-none{% endif %}">
                 {{ form_row(form.titleCs) }}
                 {{ form_row(form.aboutCs) }}
             </div>
-            <div class="{% if app.session.get('language') != 'DE' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeDe %}d-none{% endif %}">
                 {{ form_row(form.titleDe) }}
                 {{ form_row(form.aboutDe) }}
             </div>
-            <div class="{% if app.session.get('language') != 'EN' %}d-none{% endif %}">
+            <div class="{% if app.session.get('language') != localeEn %}d-none{% endif %}">
                 {{ form_row(form.titleEn) }}
                 {{ form_row(form.aboutEn) }}
             </div>
@@ -27,9 +27,13 @@
 
             <div>
                 <h5>Aktuální obrázky: </h5>
-                {% for file in artist.files %}
-                    <img class="w-50" src="{{ asset('admin/uploads/images/' ~ file.fileName) }}" alt="{{ artist.name }}">
-                {% endfor %}
+                <div class="row">
+                    {% for file in artist.files %}
+                        <div class="col-4 mb-1">
+                            <img class="img-full" src="{{ asset(imageAssets ~ file.fileName) }}" alt="{{ artist.name }}">
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             {{ form_row(form.image1) }}
             {{ form_row(form.image2) }}

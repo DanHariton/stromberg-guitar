@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    img_directory: '%kernel.project_dir%/public/admin/uploads/images'
+    img_directory: '%kernel.project_dir%/public/uploads/images'
+    img_assets_directory: 'uploads/images/'
 
 services:
     # default configuration for services in *this* file
@@ -21,7 +22,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-    App\Service\FileUploader:
+    App\Service\ImageUploader:
         arguments:
             $targetDirectoryImg: '%img_directory%'
 

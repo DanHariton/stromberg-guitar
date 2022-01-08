@@ -58,3 +58,4 @@ node_modules/
 /public/site
 /public/mix-manifest.json
 /public/bundles
+/public/uploads

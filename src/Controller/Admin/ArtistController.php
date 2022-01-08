@@ -7,7 +7,7 @@ use App\Entity\File;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Service\EntityTranslator;
-use App\Service\FileUploader;
+use App\Service\ImageUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,11 +60,11 @@ class ArtistController extends AbstractController
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param EntityTranslator $entityTranslator
-     * @param FileUploader $fileUploader
+     * @param ImageUploader $fileUploader
      * @return Response
      * @throws Exception
      */
-    public function edit(Artist $artist, EntityManagerInterface $em, Request $request, EntityTranslator $entityTranslator, FileUploader $fileUploader)
+    public function edit(Artist $artist, EntityManagerInterface $em, Request $request, EntityTranslator $entityTranslator, ImageUploader $fileUploader)
     {
         $form = $this->createForm(ArtistType::class, $entityTranslator->unmap($artist, Artist::ARTIST_VARS_LANG, Artist::ARTIST_VARS))
             ->handleRequest($request);
@@ -77,7 +77,7 @@ class ArtistController extends AbstractController
             $artistImgFile3 = $form->get('image3')->getData();
 
             if ($artistImgFile1) {
-                $newFilename1 = $fileUploader->upload($artistImgFile1);
+                $newFilename1 = $fileUploader->upload($artistImgFile1, ImageUploader::TYPE_1600x900);
                 $file1 = new File();
                 $file1->setFileName($newFilename1);
                 $artist->addFile($file1);
@@ -85,7 +85,7 @@ class ArtistController extends AbstractController
             }
 
             if ($artistImgFile2) {
-                $newFilename2 = $fileUploader->upload($artistImgFile2);
+                $newFilename2 = $fileUploader->upload($artistImgFile2, ImageUploader::TYPE_1600x900);
                 $file2 = new File();
                 $file2->setFileName($newFilename2);
                 $artist->addFile($file2);
@@ -93,7 +93,7 @@ class ArtistController extends AbstractController
             }
 
             if ($artistImgFile3) {
-                $newFilename3 = $fileUploader->upload($artistImgFile3);
+                $newFilename3 = $fileUploader->upload($artistImgFile3, ImageUploader::TYPE_1600x900);
                 $file3 = new File();
                 $file3->setFileName($newFilename3);
                 $artist->addFile($file3);
@@ -112,12 +112,12 @@ class ArtistController extends AbstractController
      * @Route("/add", name="_artist_add")
      * @param EntityManagerInterface $em
      * @param Request $request
-     * @param FileUploader $fileUploader
+     * @param ImageUploader $fileUploader
      * @param EntityTranslator $entityTranslator
      * @return Response
      * @throws Exception
      */
-    public function add(EntityManagerInterface $em, Request $request, FileUploader $fileUploader,
+    public function add(EntityManagerInterface $em, Request $request, ImageUploader $fileUploader,
                         EntityTranslator $entityTranslator)
     {
         $artist = new Artist();
@@ -130,8 +130,9 @@ class ArtistController extends AbstractController
             $artistImgFile2 = $form->get('image2')->getData();
             $artistImgFile3 = $form->get('image3')->getData();
 
+
             if ($artistImgFile1) {
-                $newFilename1 = $fileUploader->upload($artistImgFile1);
+                $newFilename1 = $fileUploader->upload($artistImgFile1, ImageUploader::TYPE_1600x900);
                 $file1 = new File();
                 $file1->setFileName($newFilename1);
                 $artist->addFile($file1);
@@ -139,7 +140,7 @@ class ArtistController extends AbstractController
             }
 
             if ($artistImgFile2) {
-                $newFilename2 = $fileUploader->upload($artistImgFile2);
+                $newFilename2 = $fileUploader->upload($artistImgFile2, ImageUploader::TYPE_1600x900);
                 $file2 = new File();
                 $file2->setFileName($newFilename2);
                 $artist->addFile($file2);
@@ -147,7 +148,7 @@ class ArtistController extends AbstractController
             }
 
             if ($artistImgFile3) {
-                $newFilename3 = $fileUploader->upload($artistImgFile3);
+                $newFilename3 = $fileUploader->upload($artistImgFile3, ImageUploader::TYPE_1600x900);
                 $file3 = new File();
                 $file3->setFileName($newFilename3);
                 $artist->addFile($file3);
