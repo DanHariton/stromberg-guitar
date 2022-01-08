@@ -72,33 +72,18 @@ class ArtistController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Artist $artist */
             $artist = $entityTranslator->map($form, $artist, Artist::ARTIST_VARS_LANG, Artist::ARTIST_VARS);
-            $artistImgFile1 = $form->get('image1')->getData();
-            $artistImgFile2 = $form->get('image2')->getData();
-            $artistImgFile3 = $form->get('image3')->getData();
+            $artistImgFile = $form->get('image1')->getData();
 
-            if ($artistImgFile1) {
-                $newFilename1 = $fileUploader->upload($artistImgFile1, ImageUploader::TYPE_1600x900);
-                $file1 = new File();
-                $file1->setFileName($newFilename1);
-                $artist->addFile($file1);
-                $em->persist($file1);
+            if ($artistImgFile) {
+                $newFilename = $fileUploader->upload($artistImgFile, ImageUploader::TYPE_1600x900);
+                $file = new File();
+                $file->setFileName($newFilename);
+                $artist->addFile($file);
+                $em->persist($file);
             }
 
-            if ($artistImgFile2) {
-                $newFilename2 = $fileUploader->upload($artistImgFile2, ImageUploader::TYPE_1600x900);
-                $file2 = new File();
-                $file2->setFileName($newFilename2);
-                $artist->addFile($file2);
-                $em->persist($file2);
-            }
-
-            if ($artistImgFile3) {
-                $newFilename3 = $fileUploader->upload($artistImgFile3, ImageUploader::TYPE_1600x900);
-                $file3 = new File();
-                $file3->setFileName($newFilename3);
-                $artist->addFile($file3);
-                $em->persist($file3);
-            }
+            $em->persist($artist);
+            $em->flush();
         }
 
         return $this->render('admin/actions/artist/edit.html.twig', [
@@ -106,6 +91,24 @@ class ArtistController extends AbstractController
             'form' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route("/delete-image/{file}", name="_artist_delete_image")
+     * @param File $file
+     * @param EntityManagerInterface $em
+     * @param ImageUploader $imageUploader
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function deleteImage(File $file, EntityManagerInterface $em, ImageUploader $imageUploader, Request $request)
+    {
+        $imageUploader->remove($file->getFileName());
+        $em->remove($file);
+        $em->flush();
+
+        $this->addFlash('success', 'Umělec byl úspěšně smazán');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
