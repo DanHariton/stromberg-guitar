@@ -1,0 +1,60 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Novinky{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Seznam novinek</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <a href="{{ path('_post_create') }}" class="btn btn-primary btn-sm mb-3">Vytvořit nový příspěvek</a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Novinky</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Název</th>
+                        <th>Stručný popis</th>
+                        <th>Datum</th>
+                        <th>Stav</th>
+                        <th>Akce</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.preview }}</td>
+                            <td>{{ post.created|date('d.m.Y') }}</td>
+                            <td>
+                                {% if post.enabled %}
+                                    <span class="badge badge-success">Publikováno</span>
+                                {% else %}
+                                    <span class="badge badge-warning">Skrytý</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if post.enabled %}
+                                    <a href="{{ path('_post_toggle', {'post': post.id}) }}" class="btn btn-warning btn-sm">Skrýt</a>
+                                {% else %}
+                                    <a href="{{ path('_post_toggle', {'post': post.id}) }}" class="btn btn-success btn-sm">Publikovat</a>
+                                {% endif %}
+                                <a href="{{ path('_post_edit', {'post': post.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
+                                <a onclick="return confirm('Opravdu chcete smazat tyto novinky?')"
+                                   href="{{ path('_post_delete', {'post': post.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    Vymazat
+                                </a>
+                            </td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Změnit kategorii oblečení{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Změnit kategorii oblečení</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="{% if app.session.get('language') != 'CZ' %}d-none{% endif %}">
+                {{ form_row(form.nameCs) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'DE' %}d-none{% endif %}">
+                {{ form_row(form.nameDe) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'EN' %}d-none{% endif %}">
+                {{ form_row(form.nameEn) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

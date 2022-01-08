@@ -1,0 +1,43 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Změna novinky{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Změnit novinku ID - {{ post.id }}</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="{% if app.session.get('language') != 'CZ' %}d-none{% endif %}">
+                {{ form_row(form.titleCs) }}
+                {{ form_row(form.previewCs) }}
+                {{ form_row(form.contentCs) }}
+                {{ form_row(form.metaTitleCs) }}
+                {{ form_row(form.metaDescriptionCs) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'DE' %}d-none{% endif %}">
+                {{ form_row(form.titleDe) }}
+                {{ form_row(form.previewDe) }}
+                {{ form_row(form.contentDe) }}
+                {{ form_row(form.metaTitleDe) }}
+                {{ form_row(form.metaDescriptionDe) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'EN' %}d-none{% endif %}">
+                {{ form_row(form.titleEn) }}
+                {{ form_row(form.previewEn) }}
+                {{ form_row(form.contentEn) }}
+                {{ form_row(form.metaTitleEn) }}
+                {{ form_row(form.metaDescriptionEn) }}
+            </div>
+            <div>
+                <h5>Aktuální obrázek: </h5>
+                <img class="w-50" src="{{ asset('admin/uploads/images/' ~ post.imageFilename) }}" alt="Obrazek Noviky">
+            </div>
+
+            {{ form_row(form.image) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

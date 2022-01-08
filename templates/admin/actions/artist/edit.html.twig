@@ -1,0 +1,40 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Změnit informace o umělci{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Změnit informace o umělci {{ artist.name }}</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <div class="{% if app.session.get('language') != 'CZ' %}d-none{% endif %}">
+                {{ form_row(form.titleCs) }}
+                {{ form_row(form.aboutCs) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'DE' %}d-none{% endif %}">
+                {{ form_row(form.titleDe) }}
+                {{ form_row(form.aboutDe) }}
+            </div>
+            <div class="{% if app.session.get('language') != 'EN' %}d-none{% endif %}">
+                {{ form_row(form.titleEn) }}
+                {{ form_row(form.aboutEn) }}
+            </div>
+            {{ form_row(form.guitar) }}
+            {{ form_row(form.link) }}
+
+            <div>
+                <h5>Aktuální obrázky: </h5>
+                {% for file in artist.files %}
+                    <img class="w-50" src="{{ asset('admin/uploads/images/' ~ file.fileName) }}" alt="{{ artist.name }}">
+                {% endfor %}
+            </div>
+            {{ form_row(form.image1) }}
+            {{ form_row(form.image2) }}
+            {{ form_row(form.image3) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

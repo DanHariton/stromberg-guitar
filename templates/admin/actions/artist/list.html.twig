@@ -1,0 +1,45 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Umělci{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Seznam umělců</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <a href="{{ path('_artist_add') }}" class="btn btn-primary btn-sm mb-3">Přidat nového umělce</a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Umělci</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Jméno</th>
+                        <th>Kytara</th>
+                        <th>Akce</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for artist in artists %}
+                    <tr>
+                        <td>{{ artist.id }}</td>
+                        <td>{{ artist.name }}</td>
+                        <td>{{ artist.guitar }}</td>
+                        <td>
+                            <a href="{{ path('_artist_edit', {'artist': artist.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
+                            <a onclick="return confirm('Opravdu chcete smazat tyto novinky?')"
+                               href="{{ path('_artist_delete', {'artist': artist.id}) }}"
+                               class="btn btn-danger btn-sm">
+                                Vymazat
+                            </a>
+                        </td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
