@@ -12,7 +12,10 @@ class EntityTranslator
     public function __construct(RequestStack $request)
     {
         $this->allLocales = ['Cs', 'En', 'De'];
-        $this->selectedViewLocale = ucfirst($request->getCurrentRequest()->get('_locale', 'cs'));
+        $this->selectedViewLocale = 'Cs';
+        if ($request->getCurrentRequest()) {
+            $this->selectedViewLocale = ucfirst($request->getCurrentRequest()->get('_locale', 'cs'));
+        }
     }
 
     public function getAllLocales()
