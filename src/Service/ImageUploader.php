@@ -2,9 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Artist;
-use App\Entity\File;
-use Doctrine\ORM\EntityManagerInterface;
+use DateTime;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -37,7 +35,7 @@ class ImageUploader
 
     public function upload(UploadedFile $file, int $imageType = 0)
     {
-        $fileName = bin2hex(random_bytes(20)) . '.' . $file->guessExtension();
+        $fileName = (new DateTime())->getTimestamp() . '_' . bin2hex(random_bytes(10)) . '.' . $file->guessExtension();
 
         $this->resizer->setImage($file);
 

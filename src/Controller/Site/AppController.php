@@ -2,7 +2,9 @@
 
 namespace App\Controller\Site;
 
+use App\Entity\Artist;
 use App\Entity\Post;
+use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,17 +41,21 @@ class AppController extends AbstractController
     /**
      * @Route("/{_locale}/artists", name="site_app_artists", defaults={"_locale": "cs"})
      */
-    public function artists()
+    public function artists(ArtistRepository $artistRepository)
     {
-        return $this->render('site/app/artists.html.twig');
+        return $this->render('site/app/artists.html.twig', [
+            'artists' => $artistRepository->findAll()
+        ]);
     }
 
     /**
-     * @Route("/{_locale}/artist", name="site_app_artist", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/artist/{artist}", name="site_app_artist", defaults={"_locale": "cs"})
      */
-    public function artist()
+    public function artist(Artist $artist)
     {
-        return $this->render('site/app/artist.html.twig');
+        return $this->render('site/app/artist.html.twig', [
+            'artist' => $artist
+        ]);
     }
 
     /**

@@ -4,24 +4,22 @@
 
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
-    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.artist.title'|trans} %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: artist.name} %}
 
     <div class="container mt-5" data-aos="fade-up">
         <div class="mb-5">
-            CONTENT
+            {{ etrans.read(artist.about)|raw }}
         </div>
 
         <div class="row">
-            <div class="col-12 col-lg-12 mb-4">
-                <img class="img-full" src="https://loremflickr.com/1000/300/guitar?random={{ random(1, 999999) }}" alt="Artist">
+            {% for image in artist.files %}
+            <div class="col-12 col-lg-4 mb-4">
+                <img class="img-full" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ artist.name }}">
             </div>
-            <div class="col-12 col-lg-6 mb-4">
-                <img class="img-full" src="https://loremflickr.com/1000/600/guitar?random={{ random(1, 999999) }}" alt="Artist">
-            </div>
-            <div class="col-12 col-lg-6 mb-4">
-                <img class="img-full" src="https://loremflickr.com/1000/600/guitar?random={{ random(1, 999999) }}" alt="Artist">
-            </div>
+            {% endfor %}
         </div>
+
+        <a href="{{ path('site_app_artists') }}" class="underlined">{{ 'site.post.back'|trans }}</a>
     </div>
 
     {% include 'site/app/_component/footer.html.twig' %}
