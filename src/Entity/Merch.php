@@ -12,7 +12,7 @@ class Merch
 {
     const MERCH_VARS_LANG = ['name'];
 
-    const MERCH_VARS = ['price'];
+    const MERCH_VARS = ['price', 'merchCategory'];
 
     /**
      * @ORM\Id

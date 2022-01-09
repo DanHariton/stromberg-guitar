@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Merch;
+use App\Entity\MerchCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,17 @@ class MerchRepository extends ServiceEntityRepository
         parent::__construct($registry, Merch::class);
     }
 
-    // /**
-    //  * @return Merch[] Returns an array of Merch objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param MerchCategory $category
+     * @return Merch[]
+     */
+    public function findAllEnabledByCategory(MerchCategory $category): array
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('m.merchCategory = :category')
+            ->setParameter('category', $category)
+            ->andWhere('m.enabled = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Merch
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

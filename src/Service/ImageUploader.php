@@ -13,9 +13,11 @@ class ImageUploader
     const TYPE_1280x720 = 1;
     const TYPE_1600x900 = 2;
     const TYPE_1920x660 = 3;
+    const TYPE_1000x1144 = 4;
     private static $size_1280x720 = [1280, 720];
     private static $size_1600x900 = [1600, 900];
     private static $size_1920x660 = [1920, 660];
+    private static $size_1000x1144 = [1000, 1144];
 
     private string $targetDirectoryImg;
     private Filesystem $filesystem;
@@ -43,6 +45,7 @@ class ImageUploader
             case self::TYPE_1280x720: $size = self::$size_1280x720; break;
             case self::TYPE_1600x900: $size = self::$size_1600x900; break;
             case self::TYPE_1920x660: $size = self::$size_1920x660; break;
+            case self::TYPE_1000x1144: $size = self::$size_1000x1144; break;
             default: $size = self::$size_1280x720;
         }
 

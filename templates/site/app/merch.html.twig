@@ -7,48 +7,26 @@
     {% include 'site/app/_component/page_title.html.twig' with {title: 'site.merch.title'|trans} %}
 
     <div class="container mt-5">
+        {% for category in categories %}
         <div class="mb-5" data-aos="fade-up">
-            <h2>Short Sleeve Shirts</h2>
+            <h2>{{ etrans.read(category.name) }}</h2>
             <div class="row">
+                {% for merch in merchRepository.findAllEnabledByCategory(category) %}
                 <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
-                    <h4>Stromberg Short Sleeve 2021</h4>
-                    <p>25 USD</p>
+                    <img class="img-full mb-3" src="{{ asset(imageAssets ~ merch.imageFilename) }}" alt="{{ etrans.read(merch.name) }}">
+                    <h4>{{ etrans.read(merch.name) }}</h4>
+                    <p>{{ merch.price }} USD</p>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
-                    <h4>Stromberg Short Sleeve 2021</h4>
-                    <p>25 USD</p>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
-                    <h4>Stromberg Short Sleeve 2021</h4>
-                    <p>25 USD</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
-
-        <div class="mb-5" data-aos="fade-up">
-            <h2>Hoodies</h2>
-            <div class="row">
-                <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
-                    <h4>Stromberg Short Sleeve 2021</h4>
-                    <p>25 USD</p>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="https://loremflickr.com/700/800/guitar?random={{ random(1, 999999) }}" alt="Short Sleeve Shirts">
-                    <h4>Stromberg Short Sleeve 2021</h4>
-                    <p>25 USD</p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
 
         <div class="bg-light-dark" data-aos="fade-up">
             <div class="row">
                 <div class="col-12 col-lg-6 p-5">
                     <div class="p-xl-5">
-                        <h2 class="mb-5">If you are intrested in some merch, let us know</h2>
+                        <h2 class="mb-5">If you are interested in some merch, let us know</h2>
 
                         <form action="">
                             <div class="form-group mb-5">

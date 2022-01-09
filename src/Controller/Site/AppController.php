@@ -3,6 +3,8 @@
 namespace App\Controller\Site;
 
 use App\Entity\Artist;
+use App\Entity\Merch;
+use App\Entity\MerchCategory;
 use App\Entity\Post;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -61,9 +63,13 @@ class AppController extends AbstractController
     /**
      * @Route("/{_locale}/merch", name="site_app_merch", defaults={"_locale": "cs"})
      */
-    public function merch()
+    public function merch(EntityManagerInterface $em)
     {
-        return $this->render('site/app/merch.html.twig');
+        $categories = $em->getRepository(MerchCategory::class)->findAll();
+        return $this->render('site/app/merch.html.twig', [
+            'categories' => $categories,
+            'merchRepository' => $em->getRepository(Merch::class),
+        ]);
     }
 
     /**

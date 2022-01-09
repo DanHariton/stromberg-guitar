@@ -143,10 +143,11 @@ class MerchController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Merch $merch */
             $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS_LANG, Merch::MERCH_VARS);
+            $merch->setEnabled(false);
             $merchImgFile = $form->get('image')->getData();
 
             if ($merchImgFile) {
-                $newFilename = $fileUploader->upload($merchImgFile);
+                $newFilename = $fileUploader->upload($merchImgFile, ImageUploader::TYPE_1000x1144);
                 $merch->setImageFilename($newFilename);
             }
 
@@ -195,12 +196,12 @@ class MerchController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Merch $merch */
-            $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS_LANG);
+            $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS_LANG, Merch::MERCH_VARS);
             $merchImgFile = $form->get('image')->getData();
 
             if ($merchImgFile) {
                 $imageUploader->remove($merch->getImageFilename());
-                $newImgFilename = $imageUploader->upload($merchImgFile);
+                $newImgFilename = $imageUploader->upload($merchImgFile, ImageUploader::TYPE_1000x1144);
                 $merch->setImageFilename($newImgFilename);
             }
 

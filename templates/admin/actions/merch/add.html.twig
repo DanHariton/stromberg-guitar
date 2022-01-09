@@ -9,7 +9,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             {{ form_start(form) }}
-            {{ form_row(form.category) }}
+            {{ form_row(form.merchCategory) }}
             <div class="{% if app.session.get('language') != localeCs %}d-none{% endif %}">
                 {{ form_row(form.nameCs) }}
             </div>

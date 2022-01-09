@@ -17,6 +17,7 @@
                     <tr>
                         <th>#</th>
                         <th>Nazev zboží</th>
+                        <th>Kategorie</th>
                         <th>Cena</th>
                         <th>Stav</th>
                         <th>Akce</th>
@@ -27,6 +28,7 @@
                     <tr>
                         <td>{{ merch.id }}</td>
                         <td>{{ etrans.jsonHtml(merch.name)|raw }}</td>
+                        <td>{% if merch.merchCategory is not null %}{{ etrans.jsonHtml(merch.merchCategory.name)|raw }}{% endif %}</td>
                         <td>{{ merch.price }}</td>
                         <td>
                             {% if merch.enabled %}

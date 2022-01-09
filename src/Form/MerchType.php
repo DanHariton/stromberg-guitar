@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\MerchCategory;
+use App\Service\EntityTranslator;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -13,12 +14,21 @@ use Symfony\Component\Validator\Constraints\File;
 
 class MerchType extends AbstractType
 {
+    private EntityTranslator $entityTranslator;
+
+    public function __construct(EntityTranslator $entityTranslator)
+    {
+        $this->entityTranslator = $entityTranslator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', EntityType::class, [
+            ->add('merchCategory', EntityType::class, [
                 'class' => MerchCategory::class,
-                'choice_label' => 'name'
+                'choice_label' => function (MerchCategory $category) {
+                    return $this->entityTranslator->read($category->getName());
+                },
             ])
             ->add('nameCs', TextType::class, [
                 'label' => 'Nazev',
