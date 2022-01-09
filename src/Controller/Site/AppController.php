@@ -25,7 +25,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitar", name="site_app_guitar", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/guitar", name="site_app_guitar", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function guitar()
     {
@@ -33,7 +33,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/about", name="site_app_about", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/about", name="site_app_about", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function about()
     {
@@ -41,7 +41,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/artists", name="site_app_artists", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/artists", name="site_app_artists", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function artists(ArtistRepository $artistRepository)
     {
@@ -51,7 +51,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/artist/{artist}", name="site_app_artist", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/artist/{artist}", name="site_app_artist", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function artist(Artist $artist)
     {
@@ -61,7 +61,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/merch", name="site_app_merch", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/merch", name="site_app_merch", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function merch(EntityManagerInterface $em)
     {
@@ -73,7 +73,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/post/{post}", name="site_app_post", defaults={"_locale": "cs"})
+     * @Route("/{_locale}/post/{post}", name="site_app_post", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
     public function post(Post $post)
     {
