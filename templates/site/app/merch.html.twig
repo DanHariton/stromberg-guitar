@@ -13,7 +13,7 @@
             <div class="row">
                 {% for merch in merchRepository.findAllEnabledByCategory(category) %}
                 <div class="col-12 col-lg-4">
-                    <img class="img-full mb-3" src="{{ asset(imageAssets ~ merch.imageFilename) }}" alt="{{ etrans.read(merch.name) }}">
+                    <img class="img-full mb-3" src="{{ asset(imageAssets ~ merch.imageFilename) }}" alt="{{ etrans.read(merch.name) }}" loading="lazy">
                     <h4>{{ etrans.read(merch.name) }}</h4>
                     <p>{{ merch.price }} USD</p>
                 </div>

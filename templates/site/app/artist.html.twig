@@ -14,7 +14,7 @@
         <div class="row">
             {% for image in artist.files %}
             <div class="col-12 col-lg-4 mb-4">
-                <img class="img-full" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ artist.name }}">
+                <img class="img-full" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ artist.name }}" loading="lazy">
             </div>
             {% endfor %}
         </div>

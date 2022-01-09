@@ -9,7 +9,7 @@
     <div id="main-carousel" class="carousel slide mb-7" data-ride="carousel" data-aos="fade-up">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ asset('images/slider1.jpg') }}" alt="Slide">
+                <img class="d-block w-100" src="{{ asset('images/slider1.jpg') }}" alt="Slide" loading="lazy">
             </div>
         </div>
         <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
@@ -31,7 +31,7 @@
 
         <div class="row mb-7 text-center no-gutters thumbnail-menu" data-aos="fade-up">
             <div class="col-12 col-md-4">
-                <a href="#">
+                <a href="{{ path('site_app_guitar') }}">
                     <div class="m-1 element zoom-out" style="background-image: url('{{ asset('images/menu/menu_models.jpg') }}')">
                         <div class="inner"><h3>{{ 'site.index.menuThumbnail.models'|trans }}</h3></div>
                     </div>
@@ -45,7 +45,7 @@
                 </a>
             </div>
             <div class="col-12 col-md-4">
-                <a href="#">
+                <a href="{{ path('site_app_merch') }}">
                     <div class="m-1 element zoom-out" style="background-image: url('{{ asset('images/menu/menu_merch.jpg') }}')">
                         <div class="inner"><h3>{{ 'site.index.menuThumbnail.merch'|trans }}</h3></div>
                     </div>
@@ -59,7 +59,7 @@
                     {% for post in lastPosts|slice(0, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}
@@ -71,7 +71,7 @@
                     {% for post in lastPosts|slice(2, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}
@@ -86,7 +86,7 @@
                     {% for post in lastPosts|slice(1, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" />
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}

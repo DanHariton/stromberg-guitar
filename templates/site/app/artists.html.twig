@@ -13,7 +13,7 @@
                 <a href="{{ path('site_app_artist', {'artist': artist.id}) }}">
                     <h2>{{ artist.name }}</h2>
                     {% if artist.files[0] is defined %}
-                    <img class="img-full" src="{{ asset(imageAssets ~ artist.files[0].fileName) }}" alt="{{ artist.name }}">
+                    <img class="img-full" src="{{ asset(imageAssets ~ artist.files[0].fileName) }}" alt="{{ artist.name }}" loading="lazy">
                     {% endif %}
                 </a>
             </div>
