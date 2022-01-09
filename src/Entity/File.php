@@ -28,12 +28,6 @@ class File
      */
     private $artist;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Merch", inversedBy="photo")
-     * @ORM\JoinColumn(name="merch_id", referencedColumnName="id")
-     */
-    private $merch;
-
 
     public function getId(): ?int
     {
@@ -60,18 +54,6 @@ class File
     public function setArtist(?Artist $artist): self
     {
         $this->artist = $artist;
-
-        return $this;
-    }
-
-    public function getMerch(): ?Merch
-    {
-        return $this->merch;
-    }
-
-    public function setMerch(?Merch $merch): self
-    {
-        $this->merch = $merch;
 
         return $this;
     }

@@ -1,0 +1,57 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% block title %}Druh zboží{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Seznam zboží</h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <a href="{{ path('_merch_add') }}" class="btn btn-primary btn-sm mb-3">Přidat nove zboží</a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Zboží</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nazev zboží</th>
+                        <th>Cena</th>
+                        <th>Stav</th>
+                        <th>Akce</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for merch in merchs %}
+                    <tr>
+                        <td>{{ merch.id }}</td>
+                        <td>{{ etrans.jsonHtml(merch.name)|raw }}</td>
+                        <td>{{ merch.price }}</td>
+                        <td>
+                            {% if merch.enabled %}
+                                <span class="badge badge-success">Publikováno</span>
+                            {% else %}
+                                <span class="badge badge-warning">Skrytý</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if merch.enabled %}
+                                <a href="{{ path('_merch_toggle', {'merch': merch.id}) }}" class="btn btn-warning btn-sm">Skrýt</a>
+                            {% else %}
+                                <a href="{{ path('_merch_toggle', {'merch': merch.id}) }}" class="btn btn-success btn-sm">Publikovat</a>
+                            {% endif %}
+                            <a href="{{ path('_merch_edit', {'merch': merch.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
+                            <a onclick="return confirm('Opravdu chcete smazat teto zboží?')"
+                               href="{{ path('_merch_delete', {'merch': merch.id}) }}"
+                               class="btn btn-danger btn-sm">
+                                Vymazat
+                            </a>
+                        </td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

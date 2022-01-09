@@ -118,7 +118,6 @@ class PostController extends AbstractController
      * @param EntityTranslator $entityTranslator
      * @param Request $request
      * @param ImageUploader $fileUploader
-     * @param Filesystem $filesystem
      * @param EntityManagerInterface $em
      * @return Response
      * @throws Exception

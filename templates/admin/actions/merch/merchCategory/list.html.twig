@@ -28,7 +28,7 @@
                         <td>
                             <a href="{{ path('_merch_category_edit', {'merchCategory': merchCategory.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
                             <a onclick="return confirm('Opravdu chcete smazat tyto novinky?')"
-                               href=""
+                               href="{{ path('_merch_category_delete', {'merchCategory': merchCategory.id}) }}"
                                class="btn btn-danger btn-sm">
                                 Vymazat
                             </a>

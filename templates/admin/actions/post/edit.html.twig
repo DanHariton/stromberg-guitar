@@ -3,7 +3,15 @@
 {% block title %}Změna novinky{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-2 text-gray-800">Změnit novinku ID - {{ post.id }}</h1>
+    <h1 class="h3 mb-2 text-gray-800">
+        Změnit novinku ID - {{ post.id }}
+        {% if post.enabled %}
+            <span class="badge badge-success">Publikováno</span>
+        {% else %}
+            <span class="badge badge-warning">Skryto</span>
+        {% endif %}
+    </h1>
+
     {% include 'admin/components/flashes.html.twig' %}
 
     <div class="card shadow mb-4">

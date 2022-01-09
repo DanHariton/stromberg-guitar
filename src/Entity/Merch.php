@@ -38,9 +38,50 @@ class Merch
     private $merchCategory;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\File", mappedBy="merch")
+     * @ORM\Column(type="string", length=255)
      */
-    private $photo;
+    private $imageFilename;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $enabled;
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     * @return Merch
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFilename()
+    {
+        return $this->imageFilename;
+    }
+
+    /**
+     * @param mixed $imageFilename
+     * @return Merch
+     */
+    public function setImageFilename($imageFilename)
+    {
+        $this->imageFilename = $imageFilename;
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -79,17 +120,6 @@ class Merch
     public function setMerchCategory(?MerchCategory $merchCategory): self
     {
         $this->merchCategory = $merchCategory;
-        return $this;
-    }
-
-    public function getPhoto(): ?File
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?File $photo): self
-    {
-        $this->photo = $photo;
         return $this;
     }
 }

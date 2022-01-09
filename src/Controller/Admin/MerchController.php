@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\File;
 use App\Entity\Merch;
 use App\Entity\MerchCategory;
+use App\Entity\Post;
 use App\Form\MerchCategoryType;
 use App\Form\MerchType;
+use App\Form\PostType;
 use App\Repository\MerchCategoryRepository;
 use App\Repository\MerchRepository;
 use App\Service\EntityTranslator;
@@ -57,7 +59,7 @@ class MerchController extends AbstractController
             $em->persist($merchCategory);
             $em->flush();
 
-            $this->addFlash('success', 'Kategorie oblečení byla úspěšně přidána');
+            $this->addFlash('success', 'Kategorie zboží(' . $merchCategory->getId() . ') byla úspěšně přidána');
             return $this->redirectToRoute("_merch_category_list");
         }
 
@@ -88,13 +90,28 @@ class MerchController extends AbstractController
             $em->persist($merchCategory);
             $em->flush();
 
-            $this->addFlash('success', 'Kategorie oblečení byla úspěšně změněna');
+            $this->addFlash('success', 'Kategorie zboží(' . $merchCategory->getId() . ') byla úspěšně změněna');
             return $this->redirectToRoute("_merch_category_list");
         }
 
         return $this->render("admin/actions/merch/merchCategory/edit.html.twig", [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/category/delete/{merchCategory}", name="_merch_category_delete")
+     * @param MerchCategory $merchCategory
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse
+     */
+    public function categoryDelete(MerchCategory $merchCategory, EntityManagerInterface $em)
+    {
+        $em->remove($merchCategory);
+        $em->flush();
+
+        $this->addFlash('success', 'Kategorie zboží byla úspěšně smazána');
+        return $this->redirectToRoute('_merch_category_list');
     }
 
     /**
@@ -125,21 +142,94 @@ class MerchController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Merch $merch */
-            $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS, Merch::MERCH_VARS_LANG);
+            $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS_LANG, Merch::MERCH_VARS);
             $merchImgFile = $form->get('image')->getData();
 
-            dd($merch);
             if ($merchImgFile) {
-                $newFilename1 = $fileUploader->upload($merchImgFile);
-                $file = new File();
-                $file->setFileName($newFilename1);
-                $merch->setPhoto($file);
-                $em->persist($file);
+                $newFilename = $fileUploader->upload($merchImgFile);
+                $merch->setImageFilename($newFilename);
             }
+
+            $em->persist($merch);
+            $em->flush();
+
+            $this->addFlash('success', 'Zboží(' . $merch->getId() . ') bylo úspěšně přidáno');
+            return $this->redirectToRoute("_merch_list");
         }
 
         return $this->render("admin/actions/merch/add.html.twig", [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/delete/{merch}", name="_merch_delete")
+     * @param Merch $merch
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse
+     */
+    public function delete(Merch $merch, EntityManagerInterface $em)
+    {
+        $em->remove($merch);
+        $em->flush();
+
+        $this->addFlash('success', 'Zboží bylo úspěšně smazáno');
+        return $this->redirectToRoute('_merch_list');
+    }
+
+    /**
+     * @Route("/edit/{merch}", name="_merch_edit")
+     * @param Merch $merch
+     * @param EntityTranslator $entityTranslator
+     * @param Request $request
+     * @param ImageUploader $imageUploader
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse|Response
+     * @throws Exception
+     */
+    public function edit(Merch $merch, EntityTranslator $entityTranslator, Request $request,
+                         ImageUploader $imageUploader, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(MerchType::class, $entityTranslator->unmap($merch, Merch::MERCH_VARS_LANG, Merch::MERCH_VARS))
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Merch $merch */
+            $merch = $entityTranslator->map($form, $merch, Merch::MERCH_VARS_LANG);
+            $merchImgFile = $form->get('image')->getData();
+
+            if ($merchImgFile) {
+                $imageUploader->remove($merch->getImageFilename());
+                $newImgFilename = $imageUploader->upload($merchImgFile);
+                $merch->setImageFilename($newImgFilename);
+            }
+
+            $em->persist($merch);
+            $em->flush();
+
+            $this->addFlash('success', 'Zboží(' . $merch->getId() . ') bylo úspěšně změněno');
+            return $this->redirectToRoute('_merch_list');
+        }
+
+        return $this->render('admin/actions/merch/edit.html.twig', [
+            'merch' => $merch,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/toggle/{merch}", name="_merch_toggle")
+     * @param Merch $merch
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse
+     */
+    public function toggleVision(Merch $merch, EntityManagerInterface $em)
+    {
+        $merch->setEnabled(!$merch->getEnabled());
+        $em->persist($merch);
+        $em->flush();
+
+        $this->addFlash('success', 'Zboží(' . $merch->getId() . ') bylo úspěšně změněno');
+        return $this->redirectToRoute('_merch_list');
     }
 }
