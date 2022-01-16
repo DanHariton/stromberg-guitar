@@ -57,7 +57,9 @@
                     {% for post in lastPosts|slice(0, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% if post.files[0] is defined %}
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}
@@ -69,7 +71,9 @@
                     {% for post in lastPosts|slice(2, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% if post.files[0] is defined %}
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}
@@ -84,7 +88,9 @@
                     {% for post in lastPosts|slice(1, 1) %}
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% if post.files[0] is defined %}
+                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
                                     {{ etrans.read(post.preview) }}
