@@ -8,15 +8,11 @@
 
     <div id="main-carousel" class="carousel slide mb-7" data-ride="carousel" data-aos="fade-up">
         <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="10000">
-                <img class="d-block w-100" src="{{ asset('images/slider1.jpg') }}" alt="Slide" loading="lazy">
+            {% for sliderImage in sliderImages %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}" data-interval="10000">
+                <img class="d-block w-100" src="{{ asset(imageAssets ~ sliderImage.imageFilename) }}" alt="{{ sliderImage.altName }}" loading="lazy">
             </div>
-            <div class="carousel-item" data-interval="10000">
-                <img class="d-block w-100" src="{{ asset('images/slider2.jpg') }}" alt="Slide" loading="lazy">
-            </div>
-            <div class="carousel-item" data-interval="10000">
-                <img class="d-block w-100" src="{{ asset('images/slider3.jpg') }}" alt="Slide" loading="lazy">
-            </div>
+            {% endfor %}
         </div>
     </div>
 

@@ -6,6 +6,7 @@ use App\Entity\Artist;
 use App\Entity\Merch;
 use App\Entity\MerchCategory;
 use App\Entity\Post;
+use App\Entity\SliderImages;
 use App\Form\ContactType;
 use App\Repository\ArtistRepository;
 use App\Service\AppMailer;
@@ -22,6 +23,7 @@ class AppController extends AbstractController
     public function index(EntityManagerInterface $em, Request $request, AppMailer $mailer)
     {
         $lastPosts = $em->getRepository(Post::class)->findLastPosts(3);
+        $sliderImages = $em->getRepository(SliderImages::class)->findByEnabled();
         $contactForm = $this->createForm(ContactType::class)->handleRequest($request);
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
@@ -32,6 +34,7 @@ class AppController extends AbstractController
 
         return $this->render('site/app/index.html.twig', [
             'lastPosts' => $lastPosts,
+            'sliderImages' => $sliderImages,
             'contactForm' => $contactForm->createView(),
         ]);
     }

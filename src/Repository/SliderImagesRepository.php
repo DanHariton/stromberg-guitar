@@ -20,24 +20,20 @@ class SliderImagesRepository extends ServiceEntityRepository
         parent::__construct($registry, SliderImages::class);
     }
 
-    /**
-     * @param $displayOrder
-     * @return int|mixed|string|null
-     * @throws NonUniqueResultException
-     */
-    public function findByDisplayOrder($displayOrder)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.displayOrder = :displayOrder')
-            ->setParameter('displayOrder', $displayOrder)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-
     public function findAllByDisplayOrder()
     {
         return $this->createQueryBuilder('s')
+            ->orderBy('s.displayOrder', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByEnabled()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.enabled = :enabled')
+            ->setParameter('enabled', true)
             ->orderBy('s.displayOrder', 'ASC')
             ->getQuery()
             ->getResult()
