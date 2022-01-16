@@ -28,6 +28,11 @@ class File
      */
     private $artist;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="files")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     */
+    private $post;
 
     public function getId(): ?int
     {
@@ -54,6 +59,18 @@ class File
     public function setArtist(?Artist $artist): self
     {
         $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }

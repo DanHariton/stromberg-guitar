@@ -39,11 +39,30 @@
                 {{ form_row(form.metaDescriptionEn) }}
             </div>
             <div>
-                <h5>Aktuální obrázek: </h5>
-                <img class="w-50" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="Obrazek Noviky">
+                <h5>Aktuální obrázky: </h5>
+                <div class="row">
+                    {% for file in post.files %}
+                        <div class="col-4 mb-1 text-center">
+                            <img class="img-full" src="{{ asset(imageAssets ~ file.fileName) }}" alt="{{ post.title }}">
+                            <a onclick="return confirm('Opravdu chcete smazat tento obrázek?')"
+                               class="btn btn-danger btn-sm mt-2"
+                               href="{{ path('_artist_delete_image', {'file': file.id}) }}">Smazat obrázek</a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
 
-            {{ form_row(form.image) }}
+            {% if post.files|length < 5 %}
+                {{ form_row(form.image1) }}
+            {% else %}
+                <div class="d-none">
+                    {{ form_row(form.image1) }}
+                </div>
+            {% endif %}
+            <div class="d-none">
+                {{ form_row(form.image2) }}
+                {{ form_row(form.image3) }}
+            </div>
 
             {{ form_end(form) }}
         </div>

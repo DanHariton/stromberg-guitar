@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\File;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
@@ -11,7 +12,6 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,11 +84,32 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $entityTranslator->map($form, $post, Post::POST_VARS_LANG);
-            $postImgFile = $form->get('image')->getData();
+            $postImgFile1 = $form->get('image1')->getData();
+            $postImgFile2 = $form->get('image2')->getData();
+            $postImgFile3 = $form->get('image3')->getData();
 
-            if ($postImgFile) {
-                $newImgFilename = $fileUploader->upload($postImgFile, ImageUploader::TYPE_1280x720);
-                $post->setImageFilename($newImgFilename);
+            if ($postImgFile1) {
+                $newFilename1 = $fileUploader->upload($postImgFile1, ImageUploader::TYPE_1280x720);
+                $file1 = new File();
+                $file1->setFileName($newFilename1);
+                $post->addFile($file1);
+                $em->persist($file1);
+            }
+
+            if ($postImgFile2) {
+                $newFilename2 = $fileUploader->upload($postImgFile2, ImageUploader::TYPE_1280x720);
+                $file2 = new File();
+                $file2->setFileName($newFilename2);
+                $post->addFile($file2);
+                $em->persist($file2);
+            }
+
+            if ($postImgFile3) {
+                $newFilename3 = $fileUploader->upload($postImgFile3, ImageUploader::TYPE_1280x720);
+                $file3 = new File();
+                $file3->setFileName($newFilename3);
+                $post->addFile($file3);
+                $em->persist($file3);
             }
 
             if (!$post->getCreated()) {
@@ -131,18 +152,20 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Post $post */
             $post = $entityTranslator->map($form, $post, Post::POST_VARS_LANG);
-            $postImgFile = $form->get('image')->getData();
+            $postImgFile = $form->get('image1')->getData();
 
             if ($postImgFile) {
-                $fileUploader->remove($post->getImageFilename());
-                $newImgFilename = $fileUploader->upload($postImgFile, ImageUploader::TYPE_1280x720);
-                $post->setImageFilename($newImgFilename);
+                $newFilename = $fileUploader->upload($postImgFile, ImageUploader::TYPE_1280x720);
+                $file = new File();
+                $file->setFileName($newFilename);
+                $post->addFile($file);
+                $em->persist($file);
             }
 
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('_post_list');
+            return $this->redirect($request->headers->get('referer'));
         }
 
         return $this->render('admin/actions/post/edit.html.twig', [

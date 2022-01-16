@@ -2,13 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\File;
 use App\Entity\Merch;
 use App\Entity\MerchCategory;
-use App\Entity\Post;
 use App\Form\MerchCategoryType;
 use App\Form\MerchType;
-use App\Form\PostType;
 use App\Repository\MerchCategoryRepository;
 use App\Repository\MerchRepository;
 use App\Service\EntityTranslator;
@@ -167,10 +164,12 @@ class MerchController extends AbstractController
      * @Route("/delete/{merch}", name="_merch_delete")
      * @param Merch $merch
      * @param EntityManagerInterface $em
+     * @param ImageUploader $imageUploader
      * @return RedirectResponse
      */
-    public function delete(Merch $merch, EntityManagerInterface $em)
+    public function delete(Merch $merch, EntityManagerInterface $em, ImageUploader $imageUploader)
     {
+        $imageUploader->remove($merch->getImageFilename());
         $em->remove($merch);
         $em->flush();
 

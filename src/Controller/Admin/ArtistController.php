@@ -107,7 +107,7 @@ class ArtistController extends AbstractController
         $em->remove($file);
         $em->flush();
 
-        $this->addFlash('success', 'Umělec byl úspěšně smazán');
+        $this->addFlash('success', 'Obrázek byl úspěšně smazán');
         return $this->redirect($request->headers->get('referer'));
     }
 

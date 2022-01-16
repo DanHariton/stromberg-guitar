@@ -52,7 +52,7 @@ class ArtistType extends AbstractType
                 'required' => false,
             ])
             ->add('image1', FileType::class, [
-                'label' => 'Obrázek 1 (5Mb max)',
+                'label' => 'Obrázek (5Mb max)',
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -65,7 +65,7 @@ class ArtistType extends AbstractType
                 ],
             ])
             ->add('image2', FileType::class, [
-                'label' => 'Obrázek 2 (5Mb max)',
+                'label' => 'Obrázek (5Mb max)',
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -78,7 +78,7 @@ class ArtistType extends AbstractType
                 ],
             ])
             ->add('image3', FileType::class, [
-                'label' => 'Obrázek 3 (5Mb max)',
+                'label' => 'Obrázek (5Mb max)',
                 'required' => false,
                 'constraints' => [
                     new File([

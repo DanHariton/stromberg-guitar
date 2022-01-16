@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +20,7 @@ class Post
 
     const POST_VARS_LANG = ['title', 'preview', 'content', 'metaTitle', 'metaDescription'];
 
-    const POST_VARS = ['created', 'enabled', 'imageFilename'];
+    const POST_VARS = ['created', 'enabled'];
 
     /**
      * @ORM\Id
@@ -63,9 +65,14 @@ class Post
     private ?string $metaDescription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="post")
      */
-    private $imageFilename;
+    private $files;
+
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -157,18 +164,40 @@ class Post
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getImageFilename()
+    public function getFiles(): Collection
     {
-        return $this->imageFilename;
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            // set the owning side to null (unless already changed)
+            if ($file->getPost() === $this) {
+                $file->setPost(null);
+            }
+        }
+
+        return $this;
     }
 
     /**
-     * @param mixed $imageFilename
+     * @param ArrayCollection $files
      */
-    public function setImageFilename($imageFilename): void
+    public function setFiles(ArrayCollection $files): void
     {
-        $this->imageFilename = $imageFilename;
+        $this->files = $files;
     }
 }

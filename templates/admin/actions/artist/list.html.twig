@@ -30,13 +30,14 @@
                         <td>{{ artist.guitar }}</td>
                         <td>
                             <a href="{{ path('_artist_edit', {'artist': artist.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
-                            <a onclick="return confirm('Opravdu chcete smazat tyto novinky?')"
+                            <a onclick="return confirm('Opravdu chcete smazat tohoto umělce?')"
                                href="{{ path('_artist_delete', {'artist': artist.id}) }}"
                                class="btn btn-danger btn-sm">
                                 Vymazat
                             </a>
                         </td>
-                        {% endfor %}
+                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

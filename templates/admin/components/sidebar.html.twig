@@ -68,6 +68,18 @@
         </div>
     </li>
 
+    <li class="nav-item {% if app.request.get('_route') starts with '_slider_' %}active{% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoContent" aria-expanded="false" aria-controls="collapseTwoMerch">
+            <i class="fas fa-quote-right"></i>
+            <span>Obsah stránek</span>
+        </a>
+        <div id="collapseTwoContent" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a href="{{ path('_slider_list') }}" class="collapse-item">Slider</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

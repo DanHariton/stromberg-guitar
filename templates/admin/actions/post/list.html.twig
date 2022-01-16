@@ -45,12 +45,13 @@
                                     <a href="{{ path('_post_toggle', {'post': post.id}) }}" class="btn btn-success btn-sm">Publikovat</a>
                                 {% endif %}
                                 <a href="{{ path('_post_edit', {'post': post.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
-                                <a onclick="return confirm('Opravdu chcete smazat tyto novinky?')"
+                                <a onclick="return confirm('Opravdu chcete smazat tuto novinku?')"
                                    href="{{ path('_post_delete', {'post': post.id}) }}"
                                    class="btn btn-danger btn-sm">
                                     Vymazat
                                 </a>
                             </td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>

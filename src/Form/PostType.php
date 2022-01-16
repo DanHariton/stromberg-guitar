@@ -93,7 +93,33 @@ class PostType extends AbstractType
                 'required' => false,
                 'constraints' => [new Length(null, 0, 255)],
             ])
-            ->add('image', FileType::class, [
+            ->add('image1', FileType::class, [
+                'label' => 'Obrázek (5Mb max)',
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5000k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Nahrajte obrázek (max size 5MB)!',
+                    ])
+                ],
+            ])
+            ->add('image2', FileType::class, [
+                'label' => 'Obrázek (5Mb max)',
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5000k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Nahrajte obrázek (max size 5MB)!',
+                    ])
+                ],
+            ])
+            ->add('image3', FileType::class, [
                 'label' => 'Obrázek (5Mb max)',
                 'required' => false,
                 'constraints' => [
