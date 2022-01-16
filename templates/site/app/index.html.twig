@@ -8,18 +8,16 @@
 
     <div id="main-carousel" class="carousel slide mb-7" data-ride="carousel" data-aos="fade-up">
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active" data-interval="10000">
                 <img class="d-block w-100" src="{{ asset('images/slider1.jpg') }}" alt="Slide" loading="lazy">
             </div>
+            <div class="carousel-item" data-interval="10000">
+                <img class="d-block w-100" src="{{ asset('images/slider2.jpg') }}" alt="Slide" loading="lazy">
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <img class="d-block w-100" src="{{ asset('images/slider3.jpg') }}" alt="Slide" loading="lazy">
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">{{ 'site.index.slider.previous'|trans }}</span>
-        </a>
-        <a class="carousel-control-next" href="#main-carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">{{ 'site.index.slider.next'|trans }}</span>
-        </a>
     </div>
 
     <div class="container">
@@ -58,7 +56,7 @@
                 <div class="col-12 col-md-6">
                     {% for post in lastPosts|slice(0, 1) %}
                         <div class="mb-5 m-1">
-                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
@@ -70,7 +68,7 @@
                     {% endfor %}
                     {% for post in lastPosts|slice(2, 1) %}
                         <div class="mb-5 m-1">
-                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
@@ -85,7 +83,7 @@
                     <div class="d-none d-md-block d-lg-block d-xl-block" style="height: 225px;"></div>
                     {% for post in lastPosts|slice(1, 1) %}
                         <div class="mb-5 m-1">
-                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="600">
+                            <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
@@ -101,20 +99,20 @@
 
         <div class="row no-gutters contact-tabs mt-5">
             <div class="col-12 col-lg-6 item" style="background-image: url('{{ asset('images/menu/menu_contact_us.jpg') }}')">
-                <a href="#tab-contact-us" class="contact-tab-link d-block pl-5 pt-5 pb-5">
+                <a href="#tab-contact-us" class="contact-tab-link pl-5 pt-5 pb-5" style="display: block;">
                     <div class="pl-lg-4">
                         <p class="text-lead mt-5">{{ 'site.index.contactMenu.contactUs'|trans }}</p>
-                        <h4 class="mb-4">
+                        <h4 class="mb-4 text-decoration-none">
                             {{ 'site.index.contactMenu.contactUsText'|trans|raw }}
                         </h4>
                     </div>
                 </a>
             </div>
             <div class="col-12 col-lg-6 item" style="background-image: url('{{ asset('images/menu/menu_contact_dist.jpg') }}')">
-                <a href="#tab-contact-distributors" class="contact-tab-link d-block pl-5 pt-5 pb-5">
+                <a href="#tab-contact-distributors" class="contact-tab-link pl-5 pt-5 pb-5" style="display: block;">
                     <div class="pl-lg-4">
                         <p class="text-lead mt-5">{{ 'site.index.contactMenu.contactDistributors'|trans }}</p>
-                        <h4 class="mb-4">
+                        <h4 class="mb-4 text-decoration-none">
                             {{ 'site.index.contactMenu.contactDistributorsText'|trans|raw }}
                         </h4>
                     </div>
@@ -128,25 +126,28 @@
                         <div class="p-xl-5">
                             <h2 class="mb-5">{{ 'site.index.contactMenu.contactUsTab.header'|trans|raw }}</h2>
 
-                            <form action="">
+                            {{ form_start(contactForm) }}
                                 <div class="form-group mb-5">
-                                    <label for="name">{{ 'site.index.contactMenu.contactUsTab.form.name'|trans }}</label>
-                                    <input type="text" class="form-control" id="name" name="name" required="required">
+                                    {{ form_errors(contactForm.name) }}
+                                    {{ form_label(contactForm.name, 'site.index.contactMenu.contactUsTab.form.name'|trans) }}
+                                    {{ form_widget(contactForm.name, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group mb-5">
-                                    <label for="email">{{ 'site.index.contactMenu.contactUsTab.form.email'|trans }}</label>
-                                    <input type="email" class="form-control" id="email" name="email" required="required">
+                                    {{ form_errors(contactForm.email) }}
+                                    {{ form_label(contactForm.email, 'site.index.contactMenu.contactUsTab.form.email'|trans) }}
+                                    {{ form_widget(contactForm.email, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group mb-5">
-                                    <label for="message">{{ 'site.index.contactMenu.contactUsTab.form.message'|trans }}</label>
-                                    <textarea type="email" class="form-control" id="message" name="message" maxlength="400"></textarea>
+                                    {{ form_errors(contactForm.content) }}
+                                    {{ form_label(contactForm.content, 'site.index.contactMenu.contactUsTab.form.message'|trans) }}
+                                    {{ form_widget(contactForm.content, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-outline-light pl-4 pr-4 float-right rounded-0">
                                         {{ 'site.index.contactMenu.contactUsTab.form.send'|trans }}
                                     </button>
                                 </div>
-                            </form>
+                            {{ form_end(contactForm) }}
                         </div>
                     </div>
                     <div class="col-12 col-md-6 p-5">
@@ -156,16 +157,68 @@
                             Hořovice 115 88 <br>
                             Czech Republic <br><br>
                             Šimon Palek <br>
-                            Telephone <a href="tel:00420721345678">00420 721 345 678</a> <br><br>
+                            {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a href="tel:00420721345678">00420 721 345 678</a> <br><br>
                             Jiří Palek <br>
-                            Telephone <a href="tel:00420721345679">00420 721 345 679</a>
+                            {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a href="tel:00420721345679">00420 721 345 679</a>
                         </p>
                     </div>
                 </div>
             </div>
             <div id="tab-contact-distributors" class="bg-light-dark item fade">
                 <div class="row">
-                    <div class="col-12 col-lg-6 p-5">
+                    <div class="col-12 p-5">
+                        <div class="p-xl-5">
+                            <h3 class="mb-5">{{ 'site.index.contactMenu.contactDistTab.contact'|trans }}</h3>
+                            <div class="row">
+                                <div class="col-12 col-lg-8">
+                                    <h4 class="mb-5">
+                                        {{ 'site.index.contactMenu.contactDistTab.contactSub'|trans|raw }}
+                                        <a class="default-underline text-size-default" href="mailto:info@nbe.cz">info@nbe.cz</a>
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-3 mb-3">
+                                    <b>Thomas Specht</b> <br><br>
+                                    <b class="text-xs">South Germany, Austria, Switzerland</b>
+                                    <p class="text-xs">Mittelstr. 37 D-88471 Laupheim Deutschland</p>
+                                    <p class="text-xs">
+                                        {{ 'site.index.contactMenu.contactDistTab.email'|trans }} <a class="default-underline text-xs" href="mailto:info@ts-audioline.de">info@ts-audioline.de</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a class="default-underline text-xs" href="tel:+4907392150060">+49 (0)7392-150060</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.mobile'|trans }} <a class="default-underline text-xs" href="tel:+4901727288787">+49 (0)172-7288787</a> <br>
+                                    </p>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-3">
+                                    <b>Stephan Saretz</b> <br><br>
+                                    <b class="text-xs">North, West, East Germany </b>
+                                    <p class="text-xs">Fliederweg 2 14469 Potsdam Deutschland</p>
+                                    <p class="text-xs">
+                                        {{ 'site.index.contactMenu.contactDistTab.email'|trans }} <a class="default-underline text-xs" href="mailto:info@ts-audioline.de">info@ts-audioline.de</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a class="default-underline text-xs" href="tel:+4907392150060">+49 (0)7392-150060</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.mobile'|trans }} <a class="default-underline text-xs" href="tel:+4901727288787">+49 (0)172-7288787</a> <br>
+                                    </p>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-3">
+                                    <b>Voerman Amersfoort BV </b> <br><br>
+                                    <b class="text-xs">Netherlands, Belgium, Luxembourg</b>
+                                    <p class="text-xs">P.O.Box 321 Vanadiumweg 17 3800 <br> AH Amersfoort the Netherlands </p>
+                                    <p class="text-xs">
+                                        {{ 'site.index.contactMenu.contactDistTab.email'|trans }} <a class="default-underline text-xs" href="mailto:info@voerman.nl">info@voerman.nl</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a class="default-underline text-xs" href="tel:0031334612908">(0031) 33 461 2908</a>
+                                    </p>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-3">
+                                    <b>iMusicnetwork e.K.</b> <br><br>
+                                    <b class="text-xs">Germany, Austria</b>
+                                    <p class="text-xs">Kapellenweg 5 97268 Kirchheim</p>
+                                    <p class="text-xs">
+                                        {{ 'site.index.contactMenu.contactDistTab.website'|trans }} <a class="default-underline text-xs" href="https://i-musicnetwork.com">www.i-musicnetwork.com</a> <br>
+                                        {{ 'site.index.contactMenu.contactDistTab.telephone'|trans }} <a class="default-underline text-xs" href="tel:+49 (0)9366 99979">+49 (0)9366 99979</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

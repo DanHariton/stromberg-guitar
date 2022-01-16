@@ -24,6 +24,13 @@ site:
           email: 'Tvůj e-mail'
           message: 'Zpráva (400 znaků)'
           send: 'Poslat'
+      contactDistTab:
+        contact: "Kontakt"
+        contactSub: "Pokud máte nějaké dotazy nebo se chcete zeptat na nástroj, kontaktujte nás na email"
+        email: "E-mail"
+        telephone: "Telefon"
+        mobile: "Mobilní"
+        website: "Webová stránka"
     posts:
       readMore: 'Přečtěte si více'
   guitar:
