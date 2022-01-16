@@ -6,9 +6,12 @@ use App\Entity\Artist;
 use App\Entity\Merch;
 use App\Entity\MerchCategory;
 use App\Entity\Post;
+use App\Form\ContactType;
 use App\Repository\ArtistRepository;
+use App\Service\AppMailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
@@ -16,11 +19,20 @@ class AppController extends AbstractController
     /**
      * @Route("/{_locale}", name="site_app_index", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
-    public function index(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em, Request $request, AppMailer $mailer)
     {
         $lastPosts = $em->getRepository(Post::class)->findLastPosts(3);
+        $contactForm = $this->createForm(ContactType::class)->handleRequest($request);
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $contactData = $contactForm->getData();
+            $mailer->contactFormSubmit($contactData['name'], $contactData['email'], $contactData['content']);
+            return $this->redirectToRoute('site_app_index');
+        }
+
         return $this->render('site/app/index.html.twig', [
-            'lastPosts' => $lastPosts
+            'lastPosts' => $lastPosts,
+            'contactForm' => $contactForm->createView(),
         ]);
     }
 

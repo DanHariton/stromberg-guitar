@@ -24,6 +24,13 @@ site:
           email: 'Your Email'
           message: 'Message (400 characters)'
           send: 'Send'
+      contactDistTab:
+        contact: "Contact"
+        contactSub: "If you have any questions or you want to inquire about an instrument, please contact us on email"
+        email: "Email"
+        telephone: "Telephone"
+        mobile: "Mobile"
+        website: "Website"
     posts:
       readMore: 'Read more'
   guitar:

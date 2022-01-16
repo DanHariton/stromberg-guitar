@@ -6,6 +6,8 @@
 parameters:
     img_directory: '%kernel.project_dir%/public/uploads/images'
     img_assets_directory: 'uploads/images/'
+    mailer_from: '%env(MAILER_FROM)%'
+    mailer_from_name: '%env(MAILER_FROM_NAME)%'
 
 services:
     # default configuration for services in *this* file
