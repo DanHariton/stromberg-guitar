@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Artist
 {
-    const ARTIST_VARS_LANG = ['title', 'about'];
+    const ARTIST_VARS_LANG = ['title', 'metaTitle', 'metaDescription', 'about'];
 
     const ARTIST_VARS = ['name', 'guitar', 'link'];
 
@@ -52,6 +52,16 @@ class Artist
      * @ORM\OneToMany(targetEntity="App\Entity\File", mappedBy="artist")
      */
     private $files;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $metaTitle;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $metaDescription;
 
     public function __construct()
     {
@@ -116,6 +126,11 @@ class Artist
         return $this->link;
     }
 
+    public function getFullLink(): ?string
+    {
+        return strpos($this->link, 'http') === 0 ? $this->link : 'https://' . $this->link;
+    }
+
     public function setLink(?string $link): self
     {
         $this->link = $link;
@@ -159,5 +174,29 @@ class Artist
     public function setFiles(ArrayCollection $files): void
     {
         $this->files = $files;
+    }
+
+    public function getMetaTitle(): ?string
+    {
+        return $this->metaTitle;
+    }
+
+    public function setMetaTitle(?string $metaTitle): self
+    {
+        $this->metaTitle = $metaTitle;
+
+        return $this;
+    }
+
+    public function getMetaDescription(): ?string
+    {
+        return $this->metaDescription;
+    }
+
+    public function setMetaDescription(?string $metaDescription): self
+    {
+        $this->metaDescription = $metaDescription;
+
+        return $this;
     }
 }

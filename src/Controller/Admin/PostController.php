@@ -165,6 +165,7 @@ class PostController extends AbstractController
             $em->persist($post);
             $em->flush();
 
+            $this->addFlash('success', 'Příspěvek byl úspěšně upraven');
             return $this->redirect($request->headers->get('referer'));
         }
 

@@ -12,14 +12,20 @@
                 {{ form_row(form.name) }}
                 <div class="{% if app.session.get('language') != localeCs %}d-none{% endif %}">
                     {{ form_row(form.titleCs) }}
+                    {{ form_row(form.metaTitleCs) }}
+                    {{ form_row(form.metaDescriptionCs) }}
                     {{ form_row(form.aboutCs) }}
                 </div>
                 <div class="{% if app.session.get('language') != localeDe %}d-none{% endif %}">
                     {{ form_row(form.titleDe) }}
+                    {{ form_row(form.metaTitleDe) }}
+                    {{ form_row(form.metaDescriptionDe) }}
                     {{ form_row(form.aboutDe) }}
                 </div>
                 <div class="{% if app.session.get('language') != localeEn %}d-none{% endif %}">
                     {{ form_row(form.titleEn) }}
+                    {{ form_row(form.metaTitleEn) }}
+                    {{ form_row(form.metaDescriptionEn) }}
                     {{ form_row(form.aboutEn) }}
                 </div>
                 {{ form_row(form.guitar) }}

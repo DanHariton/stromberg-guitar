@@ -39,6 +39,30 @@ class ArtistType extends AbstractType
                 'label' => 'Nadpis',
                 'required' => false,
             ])
+            ->add('metaTitleCs', TextType::class, [
+                'label' => 'Meta title',
+                'required' => false,
+            ])
+            ->add('metaTitleEn', TextType::class, [
+                'label' => 'Meta title',
+                'required' => false,
+            ])
+            ->add('metaTitleDe', TextType::class, [
+                'label' => 'Meta title',
+                'required' => false,
+            ])
+            ->add('metaDescriptionCs', TextType::class, [
+                'label' => 'Meta description',
+                'required' => false,
+            ])
+            ->add('metaDescriptionEn', TextType::class, [
+                'label' => 'Meta description',
+                'required' => false,
+            ])
+            ->add('metaDescriptionDe', TextType::class, [
+                'label' => 'Meta description',
+                'required' => false,
+            ])
             ->add('aboutCs', CKEditorType::class, [
                 'label' => 'O umělci',
                 'required' => false,
