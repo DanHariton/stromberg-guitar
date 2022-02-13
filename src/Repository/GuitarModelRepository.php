@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Guitar;
+use App\Entity\GuitarModel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Guitar|null find($id, $lockMode = null, $lockVersion = null)
- * @method Guitar|null findOneBy(array $criteria, array $orderBy = null)
- * @method Guitar[]    findAll()
- * @method Guitar[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method GuitarModel|null find($id, $lockMode = null, $lockVersion = null)
+ * @method GuitarModel|null findOneBy(array $criteria, array $orderBy = null)
+ * @method GuitarModel[]    findAll()
+ * @method GuitarModel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GuitarRepository extends ServiceEntityRepository
+class GuitarModelRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Guitar::class);
+        parent::__construct($registry, GuitarModel::class);
     }
 
     // /**
-    //  * @return Guitar[] Returns an array of Guitar objects
+    //  * @return GuitarModel[] Returns an array of GuitarModel objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class GuitarRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Guitar
+    public function findOneBySomeField($value): ?GuitarModel
     {
         return $this->createQueryBuilder('g')
             ->andWhere('g.exampleField = :val')

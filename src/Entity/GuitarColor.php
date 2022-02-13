@@ -2,30 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\GuitarRepository;
+use App\Repository\GuitarColorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GuitarRepository::class)
+ * @ORM\Entity(repositoryClass=GuitarColorRepository::class)
  */
-class Guitar
+class GuitarColor
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $name;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=550, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\GuitarVariant", inversedBy="colors")
+     * @ORM\JoinColumn(name="guitar_color_id", referencedColumnName="id")
      */
-    private ?string $description;
+    private $variant;
 
     public function getId(): ?int
     {
@@ -44,15 +45,14 @@ class Guitar
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getVariant(): ?GuitarVariant
     {
-        return $this->description;
+        return $this->variant;
     }
 
-    public function setDescription(?string $description): self
+    public function setVariant(?GuitarVariant $variant)
     {
-        $this->description = $description;
-
+        $this->variant = $variant;
         return $this;
     }
 }
