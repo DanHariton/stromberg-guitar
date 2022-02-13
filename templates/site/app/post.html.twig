@@ -1,21 +1,34 @@
 {% extends 'site/layout.html.twig' %}
 
-{% block title %}{{ etrans.read(post.title) }}{% endblock %}
+{% block title %}{{ etrans.read(post.metaTitle) }}{% endblock %}
+{% block description %}{{ etrans.read(post.metaDescription) }}{% endblock %}
 
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
     {% include 'site/app/_component/page_title.html.twig' with {title: etrans.read(post.title)} %}
 
-    <div class="container" data-aos="fade-up">
-        <div class="row">
-            <div class="col-12 col-lg-8">
-                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.imageFilename) }}" alt="img" loading="lazy"/>
-            </div>
-        </div>
-    </div>
-
     <div class="container mt-5 text-two-column" data-aos="fade-up">
         {{ etrans.read(post.content)|raw }}
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                {% if post.files[0] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% if post.files[1] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[1].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% if post.files[2] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[2].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     <div class="container mt-5" data-aos="fade-up">
