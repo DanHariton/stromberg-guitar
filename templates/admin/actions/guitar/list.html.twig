@@ -6,12 +6,40 @@
     <h1 class="h3 mb-2 text-gray-800">Seznam kytar</h1>
     {% include 'admin/components/flashes.html.twig' %}
 
+    <a href="{{ path('_guitar_model_add') }}" class="btn btn-primary btn-sm mb-3">Přidat novy model</a>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Modely</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Seznam kytar</h6>
         </div>
         <div class="card-body">
-            WHAHWA
+            <div class="table-responsive">
+                <table class="table table-bordered text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Model</th>
+                        <th>Akce</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for guitar in guitars %}
+                        <tr>
+                            <td>{{ guitar.id }}</td>
+                            <td>{{ guitar.name }}</td>
+                            <td>
+                                <a href="{{ path('_guitar_model_edit', {'model': guitar.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
+{#                                <a onclick="return confirm('Opravdu chcete smazat tohoto umělce?')"#}
+{#                                   href="{{ path('_artist_delete', {'artist': artist.id}) }}"#}
+{#                                   class="btn btn-danger btn-sm">#}
+{#                                    Vymazat#}
+{#                                </a>#}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

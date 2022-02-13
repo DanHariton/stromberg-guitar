@@ -34,6 +34,11 @@ class File
      */
     private $post;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=GuitarColor::class, inversedBy="images")
+     */
+    private $guitarColor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +76,18 @@ class File
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getGuitarColor(): ?GuitarColor
+    {
+        return $this->guitarColor;
+    }
+
+    public function setGuitarColor(?GuitarColor $guitarColor): self
+    {
+        $this->guitarColor = $guitarColor;
 
         return $this;
     }

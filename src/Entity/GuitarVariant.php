@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use App\Repository\GuitarVariantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GuitarVariantsRepository::class)
+ * @ORM\Entity(repositoryClass=GuitarVariantRepository::class)
  */
 class GuitarVariant
 {
+    const VARS_LANG = [];
+    const VARS = ['name'];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

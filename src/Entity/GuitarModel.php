@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GuitarModel
 {
+    const VARS_LANG = ['metaTitle', 'metaDescription', 'title', 'description', 'specs'];
+    const VARS = ['name'];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -27,7 +30,7 @@ class GuitarModel
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $metaTittle;
+    private $metaTitle;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -37,7 +40,7 @@ class GuitarModel
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $tittle;
+    private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -53,6 +56,11 @@ class GuitarModel
      * @ORM\Column(type="text", nullable=true)
      */
     private $specs;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabled;
 
     public function __construct()
     {
@@ -76,14 +84,14 @@ class GuitarModel
         return $this;
     }
 
-    public function getMetaTittle(): ?string
+    public function getMetaTitle(): ?string
     {
-        return $this->metaTittle;
+        return $this->metaTitle;
     }
 
-    public function setMetaTittle(?string $metaTittle): self
+    public function setMetaTitle(?string $metaTitle): self
     {
-        $this->metaTittle = $metaTittle;
+        $this->metaTitle = $metaTitle;
 
         return $this;
     }
@@ -100,14 +108,14 @@ class GuitarModel
         return $this;
     }
 
-    public function getTittle(): ?string
+    public function getTitle(): ?string
     {
-        return $this->tittle;
+        return $this->title;
     }
 
-    public function setTittle(?string $tittle): self
+    public function setTitle(?string $title): self
     {
-        $this->tittle = $tittle;
+        $this->title = $title;
 
         return $this;
     }
@@ -170,6 +178,18 @@ class GuitarModel
     public function setSpecs(?string $specs): self
     {
         $this->specs = $specs;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
