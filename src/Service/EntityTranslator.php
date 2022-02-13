@@ -23,6 +23,15 @@ class EntityTranslator
         return $this->allLocales;
     }
 
+    public function createEmptyAllLocalesJson()
+    {
+        $data = [];
+        foreach ($this->allLocales as $locale) {
+            $data[$locale] = '';
+        }
+        return json_encode($data);
+    }
+
     public function jsonHtml(string $json)
     {
         $locales = json_decode($json);
@@ -80,7 +89,8 @@ class EntityTranslator
 
         foreach ($varsLang as $var) {
             $getter = "get" . ucfirst($var);
-            $data[$var] = json_decode($entity->$getter());
+            $stringData = $entity->$getter() ?? $this->createEmptyAllLocalesJson();
+            $data[$var] = json_decode($stringData);
 
             foreach ($data[$var] as $key => $value) {
                 $data["{$var}{$key}"] = $value;

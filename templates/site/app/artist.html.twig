@@ -1,22 +1,46 @@
 {% extends 'site/layout.html.twig' %}
 
-{% block title %}Artist{% endblock %}
+{% block title %}{{ etrans.read(artist.metaTitle) }}{% endblock %}
+{% block description %}{{ etrans.read(artist.metaDescription) }}{% endblock %}
 
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
     {% include 'site/app/_component/page_title.html.twig' with {title: artist.name} %}
 
-    <div class="container mt-5" data-aos="fade-up">
-        <div class="mb-5">
+    <div class="container">
+        <div class="row" data-aos="fade-up">
+            {% if artist.guitar %}
+            <div class="col-12 col-md-3">
+                <strong>{{ artist.guitar }}</strong>
+            </div>
+            {% endif %}
+            {% if artist.link %}
+            <div class="col-12 col-md-3">
+                <span class="ml-5"></span> <a class="default-underline" target="_blank" href="{{ artist.getFullLink }}">{{ artist.link }}</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="mt-5 text-two-column" data-aos="fade-up">
             {{ etrans.read(artist.about)|raw }}
         </div>
 
-        <div class="row">
-            {% for image in artist.files %}
-            <div class="col-12 col-lg-4 mb-4">
-                <img class="img-full" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ artist.name }}" loading="lazy">
+        <div class="row mt-5" data-aos="fade-up">
+            <div class="col-12">
+                {% if artist.files[0] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ artist.files[0].fileName) }}" alt="{{ artist.name }}" loading="lazy"/>
+                {% endif %}
             </div>
-            {% endfor %}
+            <div class="col-12 col-md-6">
+                {% if artist.files[1] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ artist.files[1].fileName) }}" alt="{{ artist.name }}" loading="lazy"/>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% if artist.files[2] is defined %}
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ artist.files[2].fileName) }}" alt="{{ artist.name }}" loading="lazy"/>
+                {% endif %}
+            </div>
         </div>
 
         <a href="{{ path('site_app_artists') }}" class="underlined">{{ 'site.post.back'|trans }}</a>

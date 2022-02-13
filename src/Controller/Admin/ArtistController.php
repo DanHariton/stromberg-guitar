@@ -82,8 +82,11 @@ class ArtistController extends AbstractController
                 $em->persist($file);
             }
 
+            $this->addFlash('success', 'Umělec byl úspěšně upraven');
             $em->persist($artist);
             $em->flush();
+
+            return $this->redirectToRoute('_artist_edit', ['artist' => $artist->getId()]);
         }
 
         return $this->render('admin/actions/artist/edit.html.twig', [
@@ -161,6 +164,7 @@ class ArtistController extends AbstractController
             $em->persist($artist);
             $em->flush();
 
+            $this->addFlash('success', 'Umělec byl úspěšně vytvořen');
             return $this->redirectToRoute('_artist_list');
         }
 

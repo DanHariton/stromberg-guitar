@@ -6,7 +6,7 @@
     {% include 'site/app/_component/header.html.twig' %}
     {% include 'site/app/_component/page_title.html.twig' with {title: 'site.index.title'|trans} %}
 
-    <div id="main-carousel" class="carousel slide mb-7" data-ride="carousel" data-aos="fade-up">
+    <div id="main-carousel" class="carousel slide mb-4 mb-md-5 mb-lg-6 mb-xl-7" data-ride="carousel" data-aos="fade-up">
         <div class="carousel-inner">
             {% for sliderImage in sliderImages %}
             <div class="carousel-item {% if loop.first %}active{% endif %}" data-interval="10000">
