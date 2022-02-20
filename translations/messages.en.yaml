@@ -27,10 +27,12 @@ site:
       contactDistTab:
         contact: "Contact"
         contactSub: "If you have any questions or you want to inquire about an instrument, please contact us on email"
-        email: "Email"
+        email: "E-mail"
         telephone: "Telephone"
         mobile: "Mobile"
         website: "Website"
+        factory: "Factory"
+        office: "Office"
     posts:
       readMore: 'Read more'
   guitar:
@@ -38,10 +40,10 @@ site:
   about:
     title: 'About Stromberg, premier archtop guitars with a reputation for sound and playability'
   artists:
-    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    title: 'Stromberg artists'
   artist:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   merch:
-    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    title: 'Stromberg merch'
   post:
     back: 'Back'

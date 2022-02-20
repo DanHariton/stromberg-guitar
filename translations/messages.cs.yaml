@@ -31,6 +31,8 @@ site:
         telephone: "Telefon"
         mobile: "Mobilní"
         website: "Webová stránka"
+        factory: "Továrna"
+        office: "Kancelář"
     posts:
       readMore: 'Přečtěte si více'
   guitar:
@@ -38,10 +40,10 @@ site:
   about:
     title: 'O Stromberg, předních archtop kytarách s pověstí pro zvuk a hratelnost'
   artists:
-    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    title: 'Stromberg Umělci'
   artist:
     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   merch:
-    title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    title: 'Stromberg merch'
   post:
     back: 'Před'
