@@ -3,13 +3,9 @@
 namespace App\Service;
 
 use Exception;
-use SplFileInfo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageResizer
 {
-    private UploadedFile $file;
-
     /** @var resource */
     private $image;
 
@@ -82,40 +78,29 @@ class ImageResizer
         return $result;
     }
 
-    /**
-     * @return resource
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 
     /**
-     * @param SplFileInfo|UploadedFile $file
+     * @param string $filePath
      * @throws Exception
      */
-    public function setImage($file)
+    public function setImage($filePath)
     {
-        $this->file = $file;
-
-        if ($this->file && $this->file->getRealPath() && file_exists($this->file->getRealPath())) {
-            list($this->width, $this->height, $this->type) = getimagesize($this->file->getRealPath());
-
-            $ext = mb_strtolower($this->file->getClientOriginalExtension());
+        if ($filePath && file_exists($filePath)) {
+            list($this->width, $this->height, $this->type) = getimagesize($filePath);
+            $ext = pathinfo($filePath)['extension'];
 
             switch ($ext) {
                 case in_array($ext, ['jpg', 'jpeg']):
-                    $this->image = imagecreatefromjpeg($this->file->getRealPath());
+                    $this->image = imagecreatefromjpeg($filePath);
                     break;
                 case in_array($ext, ['bmp']):
-                    $this->image = imagecreatefromwbmp($this->file->getRealPath());
+                    $this->image = imagecreatefromwbmp($filePath);
                     break;
                 case in_array($ext, ['png']):
-                    $this->image = imagecreatefrompng($this->file->getRealPath());
+                    $this->image = imagecreatefrompng($filePath);
                     break;
                 default:
                     throw new Exception("ImageResize class not provide resizing for file with this type: {$ext}");
-                    break;
             }
         }
     }

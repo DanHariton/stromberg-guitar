@@ -114,9 +114,15 @@ class GuitarColor
 
     public function getMaxOrder()
     {
-        return max(array_map(function (File $file) {
+        $orders = array_map(function (File $file) {
             return $file->getOrder();
-        }, $this->images->getValues())) + 1;
+        }, $this->images->getValues());
+
+        if (empty($orders)) {
+            return 1;
+        }
+
+        return max($orders) + 1;
     }
 
     public function reorder(File $file, $way)

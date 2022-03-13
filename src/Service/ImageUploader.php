@@ -39,21 +39,20 @@ class ImageUploader
     {
         $fileName = (new DateTime())->getTimestamp() . '_' . bin2hex(random_bytes(10)) . '.' . $file->guessExtension();
 
-        $this->resizer->setImage($file);
-
-        switch ($imageType) {
-            case self::TYPE_1280x720: $size = self::$size_1280x720; break;
-            case self::TYPE_1600x900: $size = self::$size_1600x900; break;
-            case self::TYPE_1920x660: $size = self::$size_1920x660; break;
-            case self::TYPE_1000x1144: $size = self::$size_1000x1144; break;
-            default: $size = self::$size_1280x720;
-        }
-
-        $this->resizer->resizeTo(...$size);
-        $this->resizer->save($file->getRealPath());
-
         try {
             $file->move($this->getTargetDirectory(), $fileName);
+            $newPath = $this->getTargetDirectory() . DIRECTORY_SEPARATOR . $fileName;
+            $this->resizer->setImage($newPath);
+            switch ($imageType) {
+                case self::TYPE_1280x720: $size = self::$size_1280x720; break;
+                case self::TYPE_1600x900: $size = self::$size_1600x900; break;
+                case self::TYPE_1920x660: $size = self::$size_1920x660; break;
+                case self::TYPE_1000x1144: $size = self::$size_1000x1144; break;
+                default: $size = self::$size_1280x720;
+            }
+            $this->resizer->resizeTo(...$size);
+            $this->resizer->save($newPath);
+
         } catch (FileException $e) {
             throw new Exception('Soubor se nepodařilo uložit, ' . $e->getMessage());
         }
