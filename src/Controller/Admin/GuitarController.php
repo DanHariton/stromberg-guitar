@@ -114,7 +114,7 @@ class GuitarController extends AbstractController
     }
 
     /**
-     * @Route("/model/delete/{model}", name="_guitar_model_delete_model")
+     * @Route("/model/delete/{model}", name="_guitar_delete_model")
      */
     public function deleteModel(GuitarModel $model, EntityManagerInterface $em, ImageUploader $imageUploader)
     {

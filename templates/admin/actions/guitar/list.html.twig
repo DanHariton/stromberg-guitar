@@ -43,11 +43,11 @@
                                 {% endif %}
 
                                 <a href="{{ path('_guitar_model_edit', {'model': guitar.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
-{#                                <a onclick="return confirm('Opravdu chcete smazat tohoto umělce?')"#}
-{#                                   href="{{ path('_artist_delete', {'artist': artist.id}) }}"#}
-{#                                   class="btn btn-danger btn-sm">#}
-{#                                    Vymazat#}
-{#                                </a>#}
+                                <a onclick="return confirm('Jsi si jistý?')"
+                                   href="{{ path('_guitar_delete_model', {'model': guitar.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    Vymazat
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
