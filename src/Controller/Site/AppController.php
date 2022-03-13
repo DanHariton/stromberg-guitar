@@ -3,12 +3,16 @@
 namespace App\Controller\Site;
 
 use App\Entity\Artist;
+use App\Entity\GuitarColor;
+use App\Entity\GuitarModel;
+use App\Entity\GuitarVariant;
 use App\Entity\Merch;
 use App\Entity\MerchCategory;
 use App\Entity\Post;
 use App\Entity\SliderImages;
 use App\Form\ContactType;
 use App\Repository\ArtistRepository;
+use App\Repository\GuitarModelRepository;
 use App\Service\AppMailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,11 +44,85 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitar", name="site_app_guitar", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/{_locale}/guitars", name="site_app_guitars", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
      */
-    public function guitar()
+    public function guitars(GuitarModelRepository $guitarModelRepository)
     {
-        return $this->render('site/app/guitar.html.twig');
+        $guitars = $guitarModelRepository->findAllEnabled();
+
+        if (empty($guitars)) {
+            return $this->redirectToRoute('site_app_index');
+        }
+
+        /** @var GuitarModel $guitar */
+        $guitar = $guitars[0];
+
+        $variant = $guitar->getDefaultVariant() ?? ($guitar->getVariants()->getValues()[0] ?? null);
+
+        if (!$variant) {
+            return $this->redirectToRoute('site_app_model', ['model' => $guitar->getId(), 'slug' => $guitar->getNameSlug()]);
+        }
+
+        $color = $variant->getDefaultColor() ?? ($variant->getColors()->getValues()[0] ?? null);
+        if (!$color) {
+            return $this->redirectToRoute('site_app_variant', [
+                'model' => $guitar->getId(),
+                'slug' => $guitar->getNameSlug(),
+                'variant' => $variant->getId(),
+                'vSlug' => $variant->getNameSlug()]
+            );
+        }
+
+        return $this->redirectToRoute('site_app_color', [
+            'model' => $guitar->getId(),
+            'slug' => $guitar->getNameSlug(),
+            'variant' => $variant->getId(),
+            'vSlug' => $variant->getNameSlug(),
+            'color' => $color->getId(),
+            'cSlug' => $color->getNameSlug(),
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/guitar/{model}-{slug}", name="site_app_model", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     */
+    public function guitarModel(GuitarModel $model, GuitarModelRepository $guitarModelRepository)
+    {
+        $guitars = $guitarModelRepository->findAllEnabled();
+
+        return $this->render('site/app/guitar_model.html.twig', [
+            'guitars' => $guitars,
+            'guitar' => $model,
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/guitar/{model}-{slug}/{variant}-{vSlug}", name="site_app_variant", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     */
+    public function guitarVariant(GuitarVariant $variant, GuitarModelRepository $guitarModelRepository)
+    {
+        $guitars = $guitarModelRepository->findAllEnabled();
+
+        return $this->render('site/app/guitar_variant.html.twig', [
+            'guitars' => $guitars,
+            'guitar' => $variant->getModel(),
+            'variant' => $variant,
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/guitar/{model}-{slug}/{variant}-{vSlug}/{color}-{cSlug}", name="site_app_color", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     */
+    public function guitarColor(GuitarColor $color, GuitarModelRepository $guitarModelRepository)
+    {
+        $guitars = $guitarModelRepository->findAllEnabled();
+
+        return $this->render('site/app/guitar_color.html.twig', [
+            'guitars' => $guitars,
+            'guitar' => $color->getVariant()->getModel(),
+            'variant' => $color->getVariant(),
+            'color' => $color,
+        ]);
     }
 
     /**

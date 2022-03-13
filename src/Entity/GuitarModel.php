@@ -77,6 +77,46 @@ class GuitarModel
         return $this->name;
     }
 
+    public function getNameSlug(): ?string
+    {
+        return strtolower(str_replace(' ', '-', (string)$this->name));
+    }
+
+    public function getPreview()
+    {
+        /** @var GuitarVariant $variant */
+        foreach ($this->getVariants() as $variant) {
+            /** @var GuitarColor $color */
+            foreach ($variant->getColors() as $color) {
+                /** @var File $image */
+                foreach ($color->getImages() as $image) {
+                    return $image->getFileName();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public function getGallery()
+    {
+        $images = [];
+
+        /** @var GuitarVariant $variant */
+        foreach ($this->getVariants() as $variant) {
+            /** @var GuitarColor $color */
+            foreach ($variant->getColors() as $color) {
+                /** @var File $image */
+                foreach ($color->getImages() as $image) {
+                    $images[] = $image->getFileName();
+                    break;
+                }
+            }
+        }
+
+        return $images;
+    }
+
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -138,6 +178,20 @@ class GuitarModel
     public function getVariants(): Collection
     {
         return $this->variants;
+    }
+
+    public function getDefaultVariant(): ?GuitarVariant
+    {
+        /** @var GuitarVariant[] $variants */
+        $variants = $this->getVariants()->getValues();
+
+        foreach ($variants as $variant) {
+            if ($variant->getIsDefault()) {
+                return $variant;
+            }
+        }
+
+        return null;
     }
 
     public function addVariant(GuitarVariant $variant): self

@@ -39,6 +39,11 @@ class File
      */
     private $guitarColor;
 
+    /**
+     * @ORM\Column(name="`order`", type="integer", nullable=true)
+     */
+    private $order;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,18 @@ class File
     public function setGuitarColor(?GuitarColor $guitarColor): self
     {
         $this->guitarColor = $guitarColor;
+
+        return $this;
+    }
+
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?int $order): self
+    {
+        $this->order = $order;
 
         return $this;
     }

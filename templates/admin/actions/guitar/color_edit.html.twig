@@ -1,0 +1,43 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Změňte barvy k {{ guitar.name }} ({{ variant.name }}){% endblock %}
+
+{% block content %}
+
+    <h1 class="h3 mb-2 text-gray-800 mb-3">
+        <a class="btn btn-secondary btn-sm" href="{{ path('_guitar_model_edit', {'model': guitar.id}) }}">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        Změňte barvy k {{ guitar.name }} ({{ variant.name }})
+    </h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            {{ form(form) }}
+
+            <hr>
+
+            <div class="row mb-3">
+                {% for image in color.orderedImages %}
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <img class="img-full" src="{{ asset(imageAssets ~ image.fileName) }}" alt="Obrazek">
+                        <a class="btn btn-sm btn-secondary mr-1 mt-2" href="{{ path('_guitar_color_image_reorder', {'color': color.id, 'file': image.id, 'way': 'down'}) }}">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a class="btn btn-sm btn-secondary mr-1 mt-2" href="{{ path('_guitar_color_image_reorder', {'color': color.id, 'file': image.id, 'way': 'top'}) }}">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a class="btn btn-sm btn-secondary mt-2" onclick="return confirm('Jsi si jistý?')"
+                           href="{{ path('_guitar_color_image_delete', {'color': color.id, 'file': image.id}) }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {{ form(fileForm) }}
+        </div>
+    </div>
+{% endblock %}

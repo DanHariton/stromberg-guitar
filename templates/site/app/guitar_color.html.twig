@@ -1,0 +1,94 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}{{ variant.name }} ({{ color.name }}) - {{ etrans.read(guitar.metaTitle) }}{% endblock %}
+{% block description %}{{ etrans.read(guitar.metaDescription) }}{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+    {% include 'site/app/_component/page_title.html.twig' with {title: 'site.guitar.title'|trans} %}
+
+    <div class="container">
+        <div class="row mb-4" data-aos="fade-up">
+            <div class="col-12 col-sm-12 col-lg-8">
+                <div class="row mb-4">
+                    <div class="col-12 col-sm-4">
+                        <strong class="mb-4 d-block text-lead">Models</strong>
+                        {% for _guitar in guitars %}
+                            <a href="{{ path('site_app_model', {'model': _guitar.id, 'slug': _guitar.nameSlug}) }}"
+                               class="{% if _guitar.id == guitar.id %}active{% endif %}">
+                                <h5>{{ _guitar.name }}</h5>
+                            </a>
+                        {% endfor %}
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none mb-4 bg-white">
+                    </div>
+                    <div class="col-12 col-sm-4 border-left-white-sm-plus">
+                        <strong class="mb-4 d-block text-lead">Variants</strong>
+                        {% for _variant in guitar.variants %}
+                            <a href="{{ path('site_app_variant', {'model': guitar.id, 'slug': guitar.nameSlug, 'vSlug': _variant.nameSlug, 'variant': _variant.id}) }}"
+                               class="{% if _variant.id == variant.id %}active{% endif %}">
+                                <h5> {{ _variant.name }}</h5>
+                            </a>
+                        {% endfor %}
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none mb-4 bg-white">
+                    </div>
+                    <div class="col-12 col-sm-4 border-left-white-sm-plus">
+                        <strong class="mb-4 d-block text-lead">Colors</strong>
+                        {% for _color in variant.colors %}
+                            <a href="{{ path('site_app_color', {'cSlug': _color.nameSlug, 'color': _color.id, 'model': guitar.id, 'slug': guitar.nameSlug, 'vSlug': variant.nameSlug, 'variant': variant.id}) }}"
+                               class="{% if _color.id == color.id %}active{% endif %}">
+                                <h5> {{ _color.name }}</h5>
+                            </a>
+                        {% endfor %}
+                        <hr class="d-block d-sm-none d-md-none d-lg-none d-xl-none bg-white">
+                    </div>
+                </div>
+            </div>
+            {% set preview = color.preview %}
+            {% if preview is not null %}
+                <div class="col-12 col-sm-12 col-lg-4">
+                    <img class="mb-4 img-full" src="{{ asset(imageAssets ~ preview) }}" alt="img" loading="lazy" />
+                </div>
+            {% endif %}
+        </div>
+
+        {% if preview is not null %}
+            <div class="splide splide-4 mb-6" data-aos="fade-up">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {% for image in color.orderedImagesPaths %}
+                            <li class="splide__slide">
+                                <img class="img-full" src="{{ asset(imageAssets ~ image) }}" alt="img" loading="lazy" />
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
+        {% include 'site/app/_component/short_block_with_text.html.twig' with {
+            'header': etrans.read(guitar.title),
+            'text': etrans.read(guitar.description),
+            'link': ''
+        } %}
+
+        <div class="bg-light-dark p-5">
+            {{ etrans.read(guitar.specs)|raw }}
+        </div>
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+
+    <div class="modal splide-galery-modal" tabindex="-1" role="dialog" id="slider-modal">
+        <button class="btn btn-arrow btn-arrow-left" id="slider-modal-prev"><i class="fas fa-arrow-left"></i></button>
+        <button class="btn btn-arrow btn-arrow-right" id="slider-modal-next"><i class="fas fa-arrow-right"></i></button>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div id="slider-modal-image-container"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

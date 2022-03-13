@@ -38,7 +38,7 @@ class GuitarColor
     /**
      * @ORM\Column(type="boolean")
      */
-    private $enabled;
+    private $isDefault;
 
     public function __construct()
     {
@@ -53,6 +53,11 @@ class GuitarColor
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getNameSlug(): ?string
+    {
+        return strtolower(str_replace(' ', '-', (string)$this->name));
     }
 
     public function setName(string $name): self
@@ -81,6 +86,64 @@ class GuitarColor
         return $this->images;
     }
 
+    /**
+     * @return array|File[]
+     */
+    public function getOrderedImages(): array
+    {
+        $images = $this->images->getValues();
+
+        usort($images, function (File $left, File $right) {
+            return $left->getOrder() <=> $right->getOrder();
+        });
+
+        return array_values($images);
+    }
+
+    public function getOrderedImagesPaths()
+    {
+        return array_map(function (File $file) {
+            return $file->getFileName();
+        }, $this->getOrderedImages());
+    }
+
+    public function getPreview()
+    {
+        return $this->getOrderedImagesPaths()[0] ?? null;
+    }
+
+    public function getMaxOrder()
+    {
+        return max(array_map(function (File $file) {
+            return $file->getOrder();
+        }, $this->images->getValues())) + 1;
+    }
+
+    public function reorder(File $file, $way)
+    {
+        $orderedImages = $this->getOrderedImages();
+        $maxOrder = count($orderedImages);
+        foreach ($orderedImages as $index => $image) {
+            if ($image->getId() === $file->getId()) {
+                $index += $way;
+            }
+            $index = $index === $maxOrder ? $index - 1 : $index;
+            $index = $index === -1 ? 0 : $index;
+            $image->setOrder($index);
+        }
+
+        foreach ($orderedImages as $index => $image) {
+            if ($index > 0 && $orderedImages[$index-1]->getOrder() === $image->getOrder()) {
+                if ($way === 1) {
+                    $image->setOrder($image->getOrder() - 1);
+                }
+                if ($way === -1) {
+                    $orderedImages[$index-1]->setOrder($image->getOrder() + 1);
+                }
+            }
+        }
+    }
+
     public function addImage(File $image): self
     {
         if (!$this->images->contains($image)) {
@@ -103,14 +166,14 @@ class GuitarColor
         return $this;
     }
 
-    public function getEnabled(): ?bool
+    public function getIsDefault(): ?bool
     {
-        return $this->enabled;
+        return $this->isDefault;
     }
 
-    public function setEnabled(bool $enabled): self
+    public function setIsDefault(bool $isDefault): self
     {
-        $this->enabled = $enabled;
+        $this->isDefault = $isDefault;
 
         return $this;
     }

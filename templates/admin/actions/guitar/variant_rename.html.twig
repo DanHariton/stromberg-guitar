@@ -1,0 +1,20 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}Změnit variant{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800 mb-3">
+        <a class="btn btn-secondary btn-sm" href="{{ path('_guitar_model_edit', {'model': guitar.id}) }}">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        Změnit variant
+    </h1>
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

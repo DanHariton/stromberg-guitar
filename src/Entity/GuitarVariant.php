@@ -38,6 +38,11 @@ class GuitarVariant
      */
     private $colors;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDefault;
+
     public function __construct()
     {
         $this->variants = new ArrayCollection();
@@ -51,6 +56,38 @@ class GuitarVariant
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getNameSlug(): ?string
+    {
+        return strtolower(str_replace(' ', '-', (string)$this->name));
+    }
+
+    public function getPreview()
+    {
+        foreach ($this->getColors() as $color) {
+            /** @var File $image */
+            foreach ($color->getImages() as $image) {
+                return $image->getFileName();
+            }
+        }
+
+        return null;
+    }
+
+    public function getGallery()
+    {
+        $images = [];
+
+        foreach ($this->getColors() as $color) {
+            /** @var File $image */
+            foreach ($color->getImages() as $image) {
+                $images[] = $image->getFileName();
+                break;
+            }
+        }
+
+        return $images;
     }
 
     public function setName(string $name): self
@@ -77,6 +114,20 @@ class GuitarVariant
     public function getColors(): Collection
     {
         return $this->colors;
+    }
+
+    public function getDefaultColor(): ?GuitarColor
+    {
+        /** @var GuitarColor[] $colors */
+        $colors = $this->getColors()->getValues();
+
+        foreach ($colors as $color) {
+            if ($color->getIsDefault()) {
+                return $color;
+            }
+        }
+
+        return null;
     }
 
     public function addVariant(GuitarColor $color): self
@@ -107,5 +158,17 @@ class GuitarVariant
     public function setVariants(ArrayCollection $colors): void
     {
         $this->colors = $colors;
+    }
+
+    public function getIsDefault(): ?bool
+    {
+        return $this->isDefault;
+    }
+
+    public function setIsDefault(bool $isDefault): self
+    {
+        $this->isDefault = $isDefault;
+
+        return $this;
     }
 }

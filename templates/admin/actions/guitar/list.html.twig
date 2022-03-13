@@ -19,6 +19,7 @@
                     <tr>
                         <th>#</th>
                         <th>Model</th>
+                        <th>Stav</th>
                         <th>Akce</th>
                     </tr>
                     </thead>
@@ -28,6 +29,19 @@
                             <td>{{ guitar.id }}</td>
                             <td>{{ guitar.name }}</td>
                             <td>
+                                {% if guitar.enabled %}
+                                    <span class="badge badge-success">Publikováno</span>
+                                {% else %}
+                                    <span class="badge badge-warning">Skrytý</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if guitar.enabled %}
+                                    <a href="{{ path('_guitar_toggle', {'model': guitar.id}) }}" class="btn btn-warning btn-sm">Skrýt</a>
+                                {% else %}
+                                    <a href="{{ path('_guitar_toggle', {'model': guitar.id}) }}" class="btn btn-success btn-sm">Publikovat</a>
+                                {% endif %}
+
                                 <a href="{{ path('_guitar_model_edit', {'model': guitar.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
 {#                                <a onclick="return confirm('Opravdu chcete smazat tohoto umělce?')"#}
 {#                                   href="{{ path('_artist_delete', {'artist': artist.id}) }}"#}

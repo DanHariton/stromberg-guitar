@@ -19,32 +19,11 @@ class GuitarModelRepository extends ServiceEntityRepository
         parent::__construct($registry, GuitarModel::class);
     }
 
-    // /**
-    //  * @return GuitarModel[] Returns an array of GuitarModel objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllEnabled()
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('g.enabled = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?GuitarModel
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
