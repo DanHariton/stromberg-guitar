@@ -65,7 +65,7 @@ class ImageResizer
      */
     public function save($pathForSave)
     {
-        if (!is_resource($this->image)) {
+        if (!$this->image) {
             return false;
         }
 

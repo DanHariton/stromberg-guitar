@@ -41,6 +41,7 @@ class ImageUploader
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);
+
             $newPath = $this->getTargetDirectory() . DIRECTORY_SEPARATOR . $fileName;
             $this->resizer->setImage($newPath);
             switch ($imageType) {
