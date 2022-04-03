@@ -5,11 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\File;
 use App\Entity\GuitarColor;
 use App\Entity\GuitarModel;
+use App\Entity\GuitarSpec;
 use App\Entity\GuitarVariant;
 use App\Form\GuitarColorAddType;
 use App\Form\GuitarColorEditType;
 use App\Form\GuitarColorType;
 use App\Form\GuitarModelType;
+use App\Form\GuitarSpecType;
 use App\Form\GuitarVariantRenameType;
 use App\Form\GuitarVariantType;
 use App\Repository\GuitarModelRepository;
@@ -86,6 +88,10 @@ class GuitarController extends AbstractController
         $variantType = $this->createForm(GuitarVariantType::class)
             ->handleRequest($request);
 
+        $newSpec = new GuitarSpec();
+        $specType = $this->createForm(GuitarSpecType::class, $newSpec)
+            ->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var GuitarModel $model */
             $model = $entityTranslator->map($form, $model, GuitarModel::VARS_LANG, GuitarModel::VARS);
@@ -106,9 +112,18 @@ class GuitarController extends AbstractController
             return $this->redirectToRoute('_guitar_model_edit', ['model' => $model->getId()]);
         }
 
+        if ($specType->isSubmitted() && $specType->isValid()) {
+            $newSpec->setGuitar($model);
+            $em->persist($newSpec);
+            $em->flush();
+            $this->addFlash('success', 'Nový detail úspěšně vytvořen');
+            return $this->redirectToRoute('_guitar_model_edit', ['model' => $model->getId()]);
+        }
+
         return $this->render('admin/actions/guitar/model_edit.html.twig', [
             'form' => $form->createView(),
             'variantForm' => $variantType->createView(),
+            'specForm' => $specType->createView(),
             'guitar' => $model,
         ]);
     }
@@ -304,5 +319,35 @@ class GuitarController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Výchozí barva byla úspěšně změněna');
         return $this->redirectToRoute('_guitar_model_edit', ['model' => $model->getId()]);
+    }
+
+    /**
+     * @Route("/spec/delete/{model}/{spec}", name="_guitar_spec_delete")
+     */
+    public function deleteSpec(GuitarModel $model, GuitarSpec $spec, EntityManagerInterface $em)
+    {
+        $em->remove($spec);
+        $em->flush();
+        $this->addFlash('success', 'Detail byla úspěšně odstraněna');
+        return $this->redirectToRoute('_guitar_model_edit', ['model' => $model->getId()]);
+    }
+
+    /**
+     * @Route("/spec/edit/{model}/{spec}", name="_guitar_spec_edit")
+     */
+    public function editSpec(GuitarModel $model, GuitarSpec $spec, EntityManagerInterface $em, Request $request)
+    {
+        $form = $this->createForm(GuitarSpecType::class, $spec)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Detail byla úspěšně změněna');
+            return $this->redirectToRoute('_guitar_model_edit', ['model' => $model->getId()]);
+        }
+
+        return $this->render('admin/actions/guitar/spec_edit.html.twig', [
+            'form' => $form->createView(),
+            'guitar' => $model,
+        ]);
     }
 }

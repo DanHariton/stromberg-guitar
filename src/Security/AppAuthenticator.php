@@ -42,6 +42,7 @@ class AppAuthenticator extends AbstractAuthenticator
         $this->urlGenerator = $urlGenerator;
         $this->entityManager = $entityManager;
         $this->session = $session;
+        $this->session->set('language', 'en');
     }
 
     /**
@@ -91,9 +92,7 @@ class AppAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($this->session->get('language') === null) {
-            $this->session->set('language', 'cs');
-        }
+//        $this->session->set('language', 'en');
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);

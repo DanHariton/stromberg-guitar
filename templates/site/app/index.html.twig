@@ -54,7 +54,9 @@
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 {% if post.files[0] is defined %}
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    <a href="{{ path('site_app_post', {'post': post.id}) }}">
+                                        <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    </a>
                                 {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
@@ -68,7 +70,9 @@
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 {% if post.files[0] is defined %}
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    <a href="{{ path('site_app_post', {'post': post.id}) }}">
+                                        <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    </a>
                                 {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">
@@ -85,7 +89,9 @@
                         <div class="mb-5 m-1">
                             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="240">
                                 {% if post.files[0] is defined %}
-                                <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    <a href="{{ path('site_app_post', {'post': post.id}) }}">
+                                        <img class="mb-4 img-full" src="{{ asset(imageAssets ~ post.files[0].fileName) }}" alt="{{ etrans.read(post.title) }}" loading="lazy"/>
+                                    </a>
                                 {% endif %}
                                 <h2>{{ etrans.read(post.title) }}</h2>
                                 <p class="mb-4">

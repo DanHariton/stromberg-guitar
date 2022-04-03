@@ -1,13 +1,13 @@
 <div class="container mb-6">
-    <div class="language-switcher">
-        <div class="languages">
-            {% set r = app.request.attributes.get('_route') %}
-            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeCs})) }}" class="mr-2 {% if app.request.locale == 'cs' %}active{% endif %}">CZ</a>
-            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeEn})) }}" class="mr-2 {% if app.request.locale == 'en' %}active{% endif %}">EN</a>
-            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeDe})) }}" class="mr-2 {% if app.request.locale == 'de' %}active{% endif %}">DE</a>
-        </div>
-        <i class="fas fa-bars hamburger"></i>
-    </div>
+{#    <div class="language-switcher">#}
+{#        <div class="languages">#}
+{#            {% set r = app.request.attributes.get('_route') %}#}
+{#            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeCs})) }}" class="mr-2 {% if app.request.locale == 'cs' %}active{% endif %}">CZ</a>#}
+{#            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeEn})) }}" class="mr-2 {% if app.request.locale == 'en' %}active{% endif %}">EN</a>#}
+{#            <a href="{{ path(r, app.request.attributes.get('_route_params')|merge({'_locale': localeDe})) }}" class="mr-2 {% if app.request.locale == 'de' %}active{% endif %}">DE</a>#}
+{#        </div>#}
+{#        <i class="fas fa-bars hamburger"></i>#}
+{#    </div>#}
     <div id="main-logo-container" class="mt-6 mb-8" data-aos="fade-up">
         <a href="{{ path('site_app_index') }}">
             <img id="main-logo" src="{{ asset('images/logo.png') }}" alt="Logo" width="191px" loading="lazy">

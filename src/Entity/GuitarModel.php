@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GuitarModel
 {
-    const VARS_LANG = ['metaTitle', 'metaDescription', 'title', 'description', 'specs'];
+    const VARS_LANG = ['metaTitle', 'metaDescription', 'title', 'description'];
     const VARS = ['name'];
 
     /**
@@ -53,18 +53,19 @@ class GuitarModel
     private $variants;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $specs;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $enabled;
 
+    /**
+     * @ORM\OneToMany(targetEntity=GuitarSpec::class, mappedBy="guitar")
+     */
+    private $guitarSpecs;
+
     public function __construct()
     {
         $this->variants = new ArrayCollection();
+        $this->guitarSpecs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,18 +225,6 @@ class GuitarModel
         $this->variants = $variants;
     }
 
-    public function getSpecs(): ?string
-    {
-        return $this->specs;
-    }
-
-    public function setSpecs(?string $specs): self
-    {
-        $this->specs = $specs;
-
-        return $this;
-    }
-
     public function getEnabled(): ?bool
     {
         return $this->enabled;
@@ -244,6 +233,36 @@ class GuitarModel
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GuitarSpec>
+     */
+    public function getGuitarSpecs(): Collection
+    {
+        return $this->guitarSpecs;
+    }
+
+    public function addGuitarSpec(GuitarSpec $guitarSpec): self
+    {
+        if (!$this->guitarSpecs->contains($guitarSpec)) {
+            $this->guitarSpecs[] = $guitarSpec;
+            $guitarSpec->setGuitar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGuitarSpec(GuitarSpec $guitarSpec): self
+    {
+        if ($this->guitarSpecs->removeElement($guitarSpec)) {
+            // set the owning side to null (unless already changed)
+            if ($guitarSpec->getGuitar() === $this) {
+                $guitarSpec->setGuitar(null);
+            }
+        }
 
         return $this;
     }

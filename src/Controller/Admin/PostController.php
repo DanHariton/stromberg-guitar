@@ -42,8 +42,15 @@ class PostController extends AbstractController
      * @param EntityManagerInterface $em
      * @return RedirectResponse
      */
-    public function delete(Post $post, EntityManagerInterface $em)
+    public function delete(Post $post, EntityManagerInterface $em, ImageUploader $imageUploader)
     {
+        $images = $post->getFiles();
+
+        foreach ($images as $image) {
+            $imageUploader->remove($image->getFileName());
+            $em->remove($image);
+        }
+
         $em->remove($post);
         $em->flush();
 

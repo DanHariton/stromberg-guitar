@@ -61,8 +61,16 @@
             'link': ''
         } %}
 
-        <div class="bg-light-dark p-5">
-            {{ etrans.read(guitar.specs)|raw }}
+        <div class="bg-light-dark p-5 guitar-spec-container">
+            <h4 class="text-gotic font-weight-bold mb-5">{{ guitar.name }} Specs</h4>
+            <div class="row">
+                {% for spec in guitar.guitarSpecs %}
+                    <div class="col-12 col-lg-4">
+                        <p><strong>{{ spec.name }}</strong></p>
+                        <div>{{ spec.description|raw }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

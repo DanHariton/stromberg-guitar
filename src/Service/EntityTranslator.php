@@ -34,19 +34,17 @@ class EntityTranslator
 
     public function jsonHtml(string $json)
     {
-        $locales = json_decode($json);
-        $response = '';
-
-        foreach ($locales as $locale => $data) {
-            $response .= '<b>' . mb_strtoupper($locale) . '</b>: ' . $data . '<br>';
-        }
-
-        return $response;
+        $locales = json_decode($json, true);
+        return $locales['en'] ?? '';
     }
 
-    public function read(string $data)
+    public function read(?string $data)
     {
         $locales = json_decode($data, true);
+
+        if (!is_array($locales)) {
+            return is_string($locales) ? $locales : '';
+        }
 
         $result = '';
         foreach ($locales as $row) {
@@ -55,7 +53,7 @@ class EntityTranslator
             }
         }
 
-        return $locales[$this->selectedViewLocale] ?: $result;
+        return $locales[$this->selectedViewLocale] ?? $result;
     }
 
     public function map($form, $entity, $varsLang, $vars = null)

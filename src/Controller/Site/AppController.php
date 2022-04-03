@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     /**
-     * @Route("/{_locale}", name="site_app_index", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/", name="site_app_index")
      */
     public function index(EntityManagerInterface $em, Request $request, AppMailer $mailer)
     {
@@ -44,7 +44,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitars", name="site_app_guitars", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/guitars", name="site_app_guitars")
      */
     public function guitars(GuitarModelRepository $guitarModelRepository)
     {
@@ -84,7 +84,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitar/{model}-{slug}", name="site_app_model", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/guitar/{model}-{slug}", name="site_app_model")
      */
     public function guitarModel(GuitarModel $model, GuitarModelRepository $guitarModelRepository)
     {
@@ -97,7 +97,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitar/{model}-{slug}/{variant}-{vSlug}", name="site_app_variant", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/guitar/{model}-{slug}/{variant}-{vSlug}", name="site_app_variant")
      */
     public function guitarVariant(GuitarVariant $variant, GuitarModelRepository $guitarModelRepository)
     {
@@ -111,7 +111,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/guitar/{model}-{slug}/{variant}-{vSlug}/{color}-{cSlug}", name="site_app_color", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/guitar/{model}-{slug}/{variant}-{vSlug}/{color}-{cSlug}", name="site_app_color")
      */
     public function guitarColor(GuitarColor $color, GuitarModelRepository $guitarModelRepository)
     {
@@ -126,7 +126,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/about", name="site_app_about", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/about", name="site_app_about")
      */
     public function about()
     {
@@ -134,7 +134,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/artists", name="site_app_artists", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/artists", name="site_app_artists")
      */
     public function artists(ArtistRepository $artistRepository)
     {
@@ -144,7 +144,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/artist/{artist}", name="site_app_artist", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/artist/{artist}", name="site_app_artist")
      */
     public function artist(Artist $artist)
     {
@@ -154,7 +154,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/merch", name="site_app_merch", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/merch", name="site_app_merch")
      */
     public function merch(EntityManagerInterface $em)
     {
@@ -166,7 +166,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/post/{post}", name="site_app_post", defaults={"_locale": "cs"}, requirements={"_locale"="en|cs|de"})
+     * @Route("/post/{post}", name="site_app_post")
      */
     public function post(Post $post)
     {
