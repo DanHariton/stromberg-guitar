@@ -4,6 +4,7 @@ twig:
     globals:
         etrans: '@App\Service\EntityTranslator'
         imageAssets: '%img_assets_directory%'
+        assetsHashManager: '@App\Service\AssetsVersioning'
 
 when@test:
     twig:
