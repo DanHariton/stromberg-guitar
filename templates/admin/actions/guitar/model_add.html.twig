@@ -14,21 +14,18 @@
             <div class="{% if app.session.get('language') != localeCs %}d-none{% endif %}">
                 {{ form_row(form.titleCs) }}
                 {{ form_row(form.descriptionCs) }}
-                {{ form_row(form.specsCs) }}
                 {{ form_row(form.metaTitleCs) }}
                 {{ form_row(form.metaDescriptionCs) }}
             </div>
             <div class="{% if app.session.get('language') != localeDe %}d-none{% endif %}">
                 {{ form_row(form.titleDe) }}
                 {{ form_row(form.descriptionDe) }}
-                {{ form_row(form.specsDe) }}
                 {{ form_row(form.metaTitleDe) }}
                 {{ form_row(form.metaDescriptionDe) }}
             </div>
             <div class="{% if app.session.get('language') != localeEn %}d-none{% endif %}">
                 {{ form_row(form.titleEn) }}
                 {{ form_row(form.descriptionEn) }}
-                {{ form_row(form.specsEn) }}
                 {{ form_row(form.metaTitleEn) }}
                 {{ form_row(form.metaDescriptionEn) }}
             </div>
