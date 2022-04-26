@@ -35,7 +35,7 @@ class EntityTranslator
     public function jsonHtml(string $json)
     {
         $locales = json_decode($json, true);
-        return $locales['en'] ?? '';
+        return $locales['En'] ?? '';
     }
 
     public function read(?string $data)
