@@ -35,14 +35,14 @@
             </div>
             {% set preview = guitar.preview %}
             {% if preview is not null %}
-                <div class="col-12 col-sm-12 col-lg-4">
+                <div class="d-none col-12 col-sm-12 col-lg-4">
                     <img class="mb-4 img-full" src="{{ asset(imageAssets ~ preview) }}" alt="img" loading="lazy" />
                 </div>
             {% endif %}
         </div>
 
         {% if preview is not null %}
-        <div class="splide splide-4 mb-6" data-aos="fade-up">
+        <div class="d-none splide splide-4 mb-6" data-aos="fade-up">
             <div class="splide__track">
                 <ul class="splide__list">
                     {% for image in guitar.gallery %}
