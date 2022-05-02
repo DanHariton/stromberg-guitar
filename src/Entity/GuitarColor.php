@@ -183,4 +183,19 @@ class GuitarColor
 
         return $this;
     }
+
+    public function getRouteParams(): array
+    {
+        $variant = $this->getVariant();
+        $model = $variant->getModel();
+
+        return [
+            'model' => $model->getId(),
+            'slug' => $model->getNameSlug(),
+            'variant' => $variant->getId(),
+            'vSlug' => $variant->getNameSlug(),
+            'color' => $this->getId(),
+            'cSlug' => $this->getNameSlug()
+        ];
+    }
 }

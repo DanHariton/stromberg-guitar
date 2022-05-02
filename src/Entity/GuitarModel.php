@@ -118,6 +118,17 @@ class GuitarModel
         return $images;
     }
 
+    public function getAnyColor(): ?GuitarColor
+    {
+        foreach ($this->getVariants() as $variant) {
+            foreach ($variant->getColors() as $color) {
+                return $color;
+            }
+        }
+
+        return null;
+    }
+
     public function setName(string $name): self
     {
         $this->name = $name;

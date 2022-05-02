@@ -171,4 +171,13 @@ class GuitarVariant
 
         return $this;
     }
+
+    public function getAnyColor(): ?GuitarColor
+    {
+        foreach ($this->getColors() as $color) {
+            return $color;
+        }
+
+        return null;
+    }
 }

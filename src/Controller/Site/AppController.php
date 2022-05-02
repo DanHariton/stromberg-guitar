@@ -90,6 +90,11 @@ class AppController extends AbstractController
     {
         $guitars = $guitarModelRepository->findAllEnabled();
 
+        $color = $model->getAnyColor();
+        if ($color) {
+            return $this->redirectToRoute('site_app_color', $color->getRouteParams());
+        }
+
         return $this->render('site/app/guitar_model.html.twig', [
             'guitars' => $guitars,
             'guitar' => $model,
@@ -102,6 +107,11 @@ class AppController extends AbstractController
     public function guitarVariant(GuitarVariant $variant, GuitarModelRepository $guitarModelRepository)
     {
         $guitars = $guitarModelRepository->findAllEnabled();
+
+//        $color = $variant->getAnyColor();
+//        if ($color) {
+//            return $this->redirectToRoute('site_app_color', $color->getRouteParams());
+//        }
 
         return $this->render('site/app/guitar_variant.html.twig', [
             'guitars' => $guitars,
