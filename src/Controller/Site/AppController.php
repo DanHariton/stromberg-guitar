@@ -10,14 +10,20 @@ use App\Entity\Merch;
 use App\Entity\MerchCategory;
 use App\Entity\Post;
 use App\Entity\SliderImages;
+use App\Form\ContactMerchType;
 use App\Form\ContactType;
 use App\Repository\ArtistRepository;
 use App\Repository\GuitarModelRepository;
 use App\Service\AppMailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class AppController extends AbstractController
 {
@@ -165,13 +171,29 @@ class AppController extends AbstractController
 
     /**
      * @Route("/merch", name="site_app_merch")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param AppMailer $mailer
+     * @return RedirectResponse|Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    public function merch(EntityManagerInterface $em)
+    public function merch(EntityManagerInterface $em, Request $request, AppMailer $mailer)
     {
         $categories = $em->getRepository(MerchCategory::class)->findAll();
+        $contactMerchForm = $this->createForm(ContactMerchType::class)->handleRequest($request);
+
+        if ($contactMerchForm->isSubmitted() && $contactMerchForm->isValid()) {
+            $contactMerchData = $contactMerchForm->getData();
+            $mailer->contactMerchFormSubmit($contactMerchData['name'], $contactMerchData['email'], $contactMerchData['message']);
+            return $this->redirectToRoute('site_app_merch');
+        }
+
         return $this->render('site/app/merch.html.twig', [
             'categories' => $categories,
             'merchRepository' => $em->getRepository(Merch::class),
+            'contactMerchForm' => $contactMerchForm->createView(),
         ]);
     }
 
