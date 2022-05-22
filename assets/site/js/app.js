@@ -10,3 +10,4 @@ window.Movinwords = require('movinwords/dist/movinwords');
 require('./contact_tab.js');
 require('./image_slider.js');
 require('./animations.js');
+require('./captcha.js');

@@ -46,6 +46,9 @@ class MerchType extends AbstractType
                 'label' => 'Cena',
                 'required' => false,
             ])
+            ->add('captcha', ReCaptchaType::class, [
+                'type' => 'invisible'
+            ])
             ->add('image', FileType::class, [
                 'label' => 'Obrázek (5Mb max)',
                 'required' => false,

@@ -24,6 +24,9 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => true,
             ])
+            ->add('captcha', ReCaptchaType::class, [
+                'type' => 'invisible'
+            ])
             ->add('content', TextareaType::class, [
                 'required' => true,
                 'attr' => [
