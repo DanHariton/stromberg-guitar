@@ -33,6 +33,8 @@ class ReCaptchaValidationListener implements EventSubscriberInterface
             ->setExpectedHostname($request->getHost())
             ->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
+        dd($result);
+
         if (!$result->isSuccess()) {
             $event->getForm()->addError(new FormError('The captcha is invalid. Please try again.'));
         }

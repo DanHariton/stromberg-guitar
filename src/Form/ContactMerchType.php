@@ -24,6 +24,9 @@ class ContactMerchType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => true,
             ])
+            ->add('captcha', ReCaptchaType::class, [
+                'type' => 'invisible'
+            ])
             ->add('message', TextareaType::class, [
                 'required' => true,
                 'attr' => [
