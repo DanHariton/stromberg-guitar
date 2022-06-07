@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Artist
 {
-    const ARTIST_VARS_LANG = ['title', 'metaTitle', 'metaDescription', 'about'];
+    const ARTIST_VARS_LANG = ['metaTitle', 'metaDescription', 'about'];
 
     const ARTIST_VARS = ['name', 'guitar', 'link'];
 
@@ -27,11 +27,6 @@ class Artist
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -81,18 +76,6 @@ class Artist
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
 
         return $this;
     }

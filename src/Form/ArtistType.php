@@ -27,18 +27,6 @@ class ArtistType extends AbstractType
                 'label' => 'Odkaz na umělce (web nebo sociální síť)',
                 'required' => false,
             ])
-            ->add('titleCs', TextType::class, [
-                'label' => 'Nadpis',
-                'required' => false,
-            ])
-            ->add('titleEn', TextType::class, [
-                'label' => 'Nadpis',
-                'required' => false,
-            ])
-            ->add('titleDe', TextType::class, [
-                'label' => 'Nadpis',
-                'required' => false,
-            ])
             ->add('metaTitleCs', TextType::class, [
                 'label' => 'Meta title',
                 'required' => false,
