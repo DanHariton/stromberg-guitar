@@ -2,7 +2,7 @@
  * The callback function executed
  * once all the Google dependencies have loaded
  */
-function onGoogleReCaptchaApiLoad() {
+window.onGoogleReCaptchaApiLoad = function onGoogleReCaptchaApiLoad() {
     var widgets = document.querySelectorAll('[data-toggle="recaptcha"]');
     for (var i = 0; i < widgets.length; i++) {
         renderReCaptcha(widgets[i]);
@@ -17,7 +17,7 @@ function renderReCaptcha(widget) {
     var form = widget.closest('form');
     var widgetType = widget.getAttribute('data-type');
     var widgetParameters = {
-        'sitekey': '{{ gg_recaptcha_site_key }}'
+        'sitekey': document.querySelector('#gg-site-key').getAttribute('data-key')
     };
 
     if (widgetType == 'invisible') {

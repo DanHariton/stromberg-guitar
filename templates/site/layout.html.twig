@@ -22,6 +22,7 @@
 
 {% block javascripts %}
     <script src="{{ assetsHashManager.asset('site/app.js') }}"></script>
+    <div id="gg-site-key" data-key="{{ gg_recaptcha_site_key }}"></div>
     <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onGoogleReCaptchaApiLoad&render=explicit&hl={{ app.request.locale }}" async defer></script>
 {% endblock %}
 </body>
